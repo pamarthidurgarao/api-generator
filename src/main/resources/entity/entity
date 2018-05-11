@@ -1,0 +1,18 @@
+package %package_name%;
+
+import javax.persistence.*;
+import java.sql.Date;
+
+import java.io.Serializable;
+
+@Entity
+@Table(name = "`%table_name%`")
+public class %class_name% implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+%getters_setters%
+
+}

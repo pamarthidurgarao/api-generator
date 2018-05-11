@@ -1,0 +1,13 @@
+package %package_name%;
+
+
+public interface %entity_name%Service {
+
+    Iterable<%entity_name%> listAll%entity_name%s();
+
+    %entity_name% get%entity_name%ById(Integer id);
+
+    %entity_name% save%entity_name%(%entity_name% entity);
+
+    void delete%entity_name%(Integer id);
+}

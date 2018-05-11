@@ -1,0 +1,62 @@
+package %package_name%;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/%entity_var%")
+@Api(value="onlinestore", description="Operations pertaining to products in Online Store")
+public class %entity_name%Controller {
+
+    @Autowired
+    private %entity_name%Service %entity_var%Service;
+
+    
+    @ApiOperation(value = "View a list of available %entity_var%",response = Iterable.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+    @RequestMapping(value = "/list", method= RequestMethod.GET, produces = "application/json")
+    public Iterable<%entity_name%> list(){
+        return %entity_var%Service.listAll%entity_name%s();
+    }
+    @ApiOperation(value = "Search a product with an ID",response = %entity_name%.class)
+    @RequestMapping(value = "/get/{id}", method= RequestMethod.GET, produces = "application/json")
+    public %entity_name% get%entity_name%(@PathVariable Integer id){
+        return %entity_var%Service.get%entity_name%ById(id);
+    }
+
+    @ApiOperation(value = "Add a %entity_var%")
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<%entity_name%> save%entity_name%(@RequestBody %entity_name% %entity_var%){
+        %entity_var% = %entity_var%Service.save%entity_name%(%entity_var%);
+        return new ResponseEntity<%entity_name%>(%entity_var%, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Update a %entity_var%")
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity<%entity_name%> update%entity_name%(@PathVariable Integer id, @RequestBody %entity_name% %entity_var%){
+        
+        %entity_var% = %entity_var%Service.save%entity_name%(%entity_var%);
+        return new ResponseEntity<%entity_name%>(%entity_var%, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Delete a %entity_var%")
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<String> delete(@PathVariable Integer id){
+        %entity_var%Service.delete%entity_name%(id);
+        return new ResponseEntity<String>("%entity_name% deleted successfully", HttpStatus.OK);
+
+    }
+
+}

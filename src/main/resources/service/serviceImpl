@@ -1,0 +1,38 @@
+package %package_name%;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class %entity_name%ServiceImpl implements %entity_name%Service {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private %entity_name%Repository %entity_var%Repository;
+
+    @Override
+    public Iterable<%entity_name%> listAll%entity_name%s() {
+        logger.debug("listAll%entity_name%s called");
+        return %entity_var%Repository.findAll();
+    }
+
+    @Override
+    public %entity_name% get%entity_name%ById(Integer id) {
+        logger.debug("get%entity_name%ById called");
+        return %entity_var%Repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public %entity_name% save%entity_name%(%entity_name% entity) {
+        logger.debug("save%entity_name% called");
+        return %entity_var%Repository.save(entity);
+    }
+
+    @Override
+    public void delete%entity_name%(Integer id) {
+        logger.debug("delete%entity_name% called");
+        %entity_var%Repository.deleteById(id);
+    }
+}
