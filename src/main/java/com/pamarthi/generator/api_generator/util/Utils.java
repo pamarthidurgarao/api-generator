@@ -1,4 +1,4 @@
-package com.pramati.demo.api_generator.util;
+package com.pamarthi.generator.api_generator.util;
 
 import java.io.File;
 import java.io.IOException;

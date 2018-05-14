@@ -1,26 +1,22 @@
-package com.pramati.demo.api_generator.util;
+package com.pamarthi.generator.api_generator.entity;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-public class PomGenerator {
+import com.pamarthi.generator.api_generator.util.Utils;
+
+public class SwaggerConfigGenerator {
 
 	public void generator(String apiName, String packageName) {
-		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("pom/pom");
+		String path = ProjectStructureGenerator.packageGenerator(apiName, packageName + "/" + "config");
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("config/swaggerConfig");
 		String result = new BufferedReader(new InputStreamReader(inputStream)).lines().parallel()
 				.collect(Collectors.joining("\n"));
 		result = Utils.replace(result, "app_name", apiName);
 		result = Utils.replace(result, "package_name", packageName);
-		File pomFile = new File(System.getProperty("java.io.tmpdir") + "/" + apiName + "/pom.xml");
-		try {
-			FileWriter writer = new FileWriter(pomFile);
-			writer.write(result);
-			writer.close();
-		} catch (Exception e) {
-		}
+
+		ClassGenerator.generate(path + "/SwaggerConfig.java", result);
 	}
 }

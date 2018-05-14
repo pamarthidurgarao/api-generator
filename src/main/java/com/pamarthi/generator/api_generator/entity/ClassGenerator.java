@@ -1,4 +1,4 @@
-package com.pramati.demo.api_generator.util;
+package com.pamarthi.generator.api_generator.entity;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,6 +9,8 @@ import javax.tools.JavaCompiler;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
+
+import com.pamarthi.generator.api_generator.util.Utils;
 
 public class ClassGenerator {
 

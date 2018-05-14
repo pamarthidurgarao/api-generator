@@ -1,5 +1,4 @@
-package %package_name%;
-
+package %package_name%.%entity_var%;
 
 public interface %entity_name%Service {
 
