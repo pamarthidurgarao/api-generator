@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pamarthi.generator.api_generator.entity.AppGenerator;
 import com.pamarthi.generator.api_generator.model.AppModel;
+import com.pamarthi.generator.api_generator.util.ZipFileGenerator;
 
 @RestController
 @RequestMapping("/api")
@@ -42,9 +43,10 @@ public class APIGeneratorController {
 	@GetMapping("/download")
 	public void downloadFile(HttpServletResponse resonse, @RequestParam String fileName) throws IOException {
 
+		ZipFileGenerator.pack(systemPath + "/" + fileName, systemPath + "/" + fileName + ".zip");
 		MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
 
-		File file = new File(systemPath + "/" + fileName);
+		File file = new File(systemPath + "/" + fileName + ".zip");
 
 		resonse.setContentType(mediaType.getType());
 		resonse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName());

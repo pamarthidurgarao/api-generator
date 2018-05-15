@@ -3,6 +3,7 @@ package com.pamarthi.generator.api_generator.entity;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.pamarthi.generator.api_generator.model.EntityModel;
@@ -21,8 +22,9 @@ public class EntityGenerator {
 		result = Utils.replace(result, "table_name", entity.toLowerCase());
 		result = Utils.replace(result, "class_name", className);
 		result = Utils.replace(result, "entity_var", entity.toLowerCase());
-		result = Utils.replace(result, "getters_setters", SetterGetterGenerator.generate(entityModel.getColumns()));
-
+		for (Map.Entry<String, String> entry : SetterGetterGenerator.generate(entityModel, packageName).entrySet()) {
+			result = Utils.replace(result, entry.getKey(), entry.getValue());
+		}
 		ClassGenerator.generate(path + "/" + className + ".java", result);
 
 	}

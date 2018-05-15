@@ -8,6 +8,7 @@ public class ColumnModel {
 	private boolean isPrimary;
 	private boolean isUnique;
 	private boolean isAutoGen;
+	private RelationModel relation;
 
 	public String getName() {
 		return name;
@@ -55,6 +56,14 @@ public class ColumnModel {
 
 	public void setAutoGen(boolean isAutoGen) {
 		this.isAutoGen = isAutoGen;
+	}
+
+	public RelationModel getRelation() {
+		return relation;
+	}
+
+	public void setRelation(RelationModel relation) {
+		this.relation = relation;
 	}
 
 }

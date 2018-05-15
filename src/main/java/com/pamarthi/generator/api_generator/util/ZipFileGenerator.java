@@ -29,7 +29,10 @@ public class ZipFileGenerator {
 	}
 
 	public static void pack(String sourceDirPath, String zipFilePath) throws IOException {
-
+		File fos = new File(zipFilePath);
+		if (fos.exists()) {
+			fos.delete();
+		}
 		Path p = Files.createFile(Paths.get(zipFilePath));
 		try (ZipOutputStream zs = new ZipOutputStream(Files.newOutputStream(p))) {
 			Path pp = Paths.get(sourceDirPath);

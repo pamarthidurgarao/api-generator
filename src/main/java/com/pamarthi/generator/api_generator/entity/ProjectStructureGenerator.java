@@ -13,14 +13,14 @@ public class ProjectStructureGenerator {
 
 		if (apiDir.exists()) {
 			removeDirectory(apiDir);
-			File classFolder = new File(systemPath + "/output");
-			removeDirectory(classFolder);
-			classFolder.mkdirs();
-			apiDir = new File(systemPath + "/" + apiName + "/src/main/java");
-			apiDir.mkdirs();
-			apiDir = new File(systemPath + "/" + apiName + "/src/main/resources");
-			apiDir.mkdirs();
 		}
+		File classFolder = new File(systemPath + "/output");
+		removeDirectory(classFolder);
+		classFolder.mkdirs();
+		apiDir = new File(systemPath + "/" + apiName + "/src/main/java");
+		apiDir.mkdirs();
+		apiDir = new File(systemPath + "/" + apiName + "/src/main/resources");
+		apiDir.mkdirs();
 	}
 
 	public static String packageGenerator(String apiName, String packageName) {

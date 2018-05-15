@@ -1,21 +1,53 @@
 package com.pamarthi.generator.api_generator.entity;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.pamarthi.generator.api_generator.model.ColumnModel;
+import com.pamarthi.generator.api_generator.model.EntityModel;
+import com.pamarthi.generator.api_generator.model.RelationType;
 
 public class SetterGetterGenerator {
 
-	public static String generate(List<ColumnModel> columnModels) {
+	public static StringBuilder packageBuilder = new StringBuilder();
+
+	public static Map<String, String> generate(EntityModel entityModel, String packageName) {
+		Map<String, String> data = new HashMap<>();
+		packageBuilder = new StringBuilder();
 		StringBuilder builder = new StringBuilder();
 		StringBuilder propBuilder = new StringBuilder();
 
-		for (ColumnModel columnModel : columnModels) {
-			propBuilder.append(propertyGen(columnModel));
-			builder.append(setterGen(columnModel.getType(), columnModel.getName()));
-			builder.append(getterGen(columnModel.getType(), columnModel.getName()));
+		for (ColumnModel columnModel : entityModel.getColumns()) {
+			propBuilder.append(propertyGen(columnModel, entityModel.getName(), packageName));
+			if (columnModel.getRelation() != null) {
+				String tableName = columnModel.getRelation().getTableName();
+				tableName = tableName.substring(0, 1).toUpperCase() + tableName.substring(1);
+				if (RelationType.MANYTOONE == columnModel.getRelation().getRelationType()) {
+					builder.append(setterGen(tableName, columnModel.getName()));
+					builder.append(getterGen(tableName, columnModel.getName()));
+				}
+				if (RelationType.MANYTOMANY == columnModel.getRelation().getRelationType()) {
+
+				}
+				if (RelationType.ONETOMANY == columnModel.getRelation().getRelationType()) {
+					builder.append(setterGen("List<" + tableName + ">", columnModel.getName()));
+
+					builder.append(getterGen("List<" + tableName + ">", columnModel.getName()));
+				}
+
+			} else {
+				builder.append(setterGen(columnModel.getType(), columnModel.getName()));
+				builder.append(getterGen(columnModel.getType(), columnModel.getName()));
+			}
 		}
-		return propBuilder.toString() + builder.toString();
+		data.put("class_properties", propBuilder.toString());
+
+		data.put("getters_setters", builder.toString());
+		if (!packageBuilder.toString().isEmpty()) {
+			packageBuilder.append("\timport java.util.List;");
+		}
+		data.put("import_statements", packageBuilder.toString());
+		return data;
 	}
 
 	public static void main(String[] args) {
@@ -32,16 +64,47 @@ public class SetterGetterGenerator {
 				+ "return " + name + ";\n\t}\n";
 	}
 
-	public static String propertyGen(ColumnModel columnModel) {
+	public static String propertyGen(ColumnModel columnModel, String entity, String packageName) {
 		StringBuilder builder = new StringBuilder();
+
+		if (columnModel.getRelation() != null) {
+			return relation(columnModel, packageName, entity);
+		}
 		if (columnModel.isPrimary()) {
 			builder.append("\t@Id\n");
+		}
+		if (columnModel.isAutoGen()) {
+			builder.append("\t@GeneratedValue(strategy = GenerationType.IDENTITY)\n");
 		}
 		String column = "\"" + columnModel.getName() + "\"";
 		builder.append("\t@Column(name = " + column + ", unique = " + columnModel.isUnique() + ", nullable = "
 				+ !columnModel.isMandatory() + ")\n");
 
-		builder.append("\tprivate " + columnModel.getType() + " " + columnModel.getName() + ";\n");
+		builder.append("\tprivate " + columnModel.getType() + " " + columnModel.getName() + ";\n\n");
+		return builder.toString();
+	}
+
+	public static String relation(ColumnModel columnModel, String packageName, String entity) {
+		StringBuilder builder = new StringBuilder();
+		String tableName = columnModel.getRelation().getTableName();
+		tableName = tableName.substring(0, 1).toUpperCase() + tableName.substring(1);
+		String column = "\"" + columnModel.getRelation().getColumnName() + "\"";
+		if (RelationType.MANYTOONE == columnModel.getRelation().getRelationType()) {
+			builder.append("\t@ManyToOne\n");
+			builder.append("\t@JoinColumn(name=" + column + ")\n");
+			builder.append("\tprivate " + tableName + " " + columnModel.getName() + ";\n\n");
+		}
+		if (RelationType.MANYTOMANY == columnModel.getRelation().getRelationType()) {
+
+		}
+		if (RelationType.ONETOMANY == columnModel.getRelation().getRelationType()) {
+			builder.append("\t@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)\n");
+			builder.append("\t@JoinColumn(name=" + column + ")\n");
+			builder.append("\tprivate List<" + tableName + "> " + columnModel.getName() + ";\n");
+
+		}
+		packageBuilder.append("import " + packageName + "." + tableName.toLowerCase() + "." + tableName + ";\n");
+
 		return builder.toString();
 	}
 }
