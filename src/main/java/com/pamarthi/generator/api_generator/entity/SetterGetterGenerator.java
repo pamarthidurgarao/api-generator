@@ -19,7 +19,7 @@ public class SetterGetterGenerator {
 
 		for (ColumnModel columnModel : entityModel.getColumns()) {
 			propBuilder.append(propertyGen(columnModel, entityModel.getName(), packageName));
-			if (columnModel.getRelation() != null) {
+			if (columnModel.getRelation() != null && columnModel.getRelation().getColumnName() != null) {
 				String tableName = columnModel.getRelation().getTableName();
 				tableName = tableName.substring(0, 1).toUpperCase() + tableName.substring(1);
 				if (RelationType.MANYTOONE == columnModel.getRelation().getRelationType()) {
@@ -67,18 +67,18 @@ public class SetterGetterGenerator {
 	public static String propertyGen(ColumnModel columnModel, String entity, String packageName) {
 		StringBuilder builder = new StringBuilder();
 
-		if (columnModel.getRelation() != null) {
+		if (columnModel.getRelation() != null && columnModel.getRelation().getColumnName() != null) {
 			return relation(columnModel, packageName, entity);
 		}
-		if (columnModel.isPrimary()) {
+		if (columnModel.getPrimary()) {
 			builder.append("\t@Id\n");
 		}
-		if (columnModel.isAutoGen()) {
+		if (columnModel.getAutoGen()) {
 			builder.append("\t@GeneratedValue(strategy = GenerationType.IDENTITY)\n");
 		}
 		String column = "\"" + columnModel.getName() + "\"";
-		builder.append("\t@Column(name = " + column + ", unique = " + columnModel.isUnique() + ", nullable = "
-				+ !columnModel.isMandatory() + ")\n");
+		builder.append("\t@Column(name = " + column + ", unique = " + columnModel.getUnique() + ", nullable = "
+				+ !columnModel.getMandatory() + ")\n");
 
 		builder.append("\tprivate " + columnModel.getType() + " " + columnModel.getName() + ";\n\n");
 		return builder.toString();

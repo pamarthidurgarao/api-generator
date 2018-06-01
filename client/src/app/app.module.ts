@@ -1,27 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module'
-import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+import { UserModule } from './user/user.module';
 import { AppComponent } from './app.component';
-import { EntityComponent } from './entity/entity.component'
-import { AppServiceService } from './app-service.service'
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { AppService } from './service/app.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    EntityComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
     HttpClientModule,
-    MaterialModule
+    UserModule,
+    RouterModule.forRoot([
+      { path: '', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
+      { path: 'signin', component: LoginComponent }
+    ])
   ],
-  providers: [AppServiceService],
-  bootstrap: [AppComponent],
-  entryComponents: [EntityComponent]
+  providers: [AppService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

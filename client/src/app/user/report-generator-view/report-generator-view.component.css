@@ -1,0 +1,15 @@
+.modal-lg{
+    max-width: 1200px;
+}
+.reports .edit{
+position: absolute; top:0px; right:25px; cursor: pointer;
+}
+.reports .delete{
+position: absolute; top:1px; right:5px; cursor: pointer;
+}
+.reports .card{
+min-width: 250px;
+}
+.reports .card ul{
+    list-style: none; padding-left:0rem;
+}

@@ -4,66 +4,53 @@ public class ColumnModel {
 
 	private String name;
 	private String type;
-	private boolean isMandatory;
-	private boolean isPrimary;
-	private boolean isUnique;
-	private boolean isAutoGen;
+	private Boolean mandatory;
+	private Boolean primary;
+	private Boolean unique;
+	private Boolean autoGen;
 	private RelationModel relation;
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public boolean isMandatory() {
-		return isMandatory;
+	public Boolean getMandatory() {
+		return mandatory;
 	}
-
-	public void setMandatory(boolean isMandatory) {
-		this.isMandatory = isMandatory;
+	public void setMandatory(Boolean mandatory) {
+		this.mandatory = mandatory;
 	}
-
-	public boolean isPrimary() {
-		return isPrimary;
+	public Boolean getPrimary() {
+		return primary;
 	}
-
-	public void setPrimary(boolean isPrimary) {
-		this.isPrimary = isPrimary;
+	public void setPrimary(Boolean primary) {
+		this.primary = primary;
 	}
-
-	public boolean isUnique() {
-		return isUnique;
+	public Boolean getUnique() {
+		return unique;
 	}
-
-	public void setUnique(boolean isUnique) {
-		this.isUnique = isUnique;
+	public void setUnique(Boolean unique) {
+		this.unique = unique;
 	}
-
-	public boolean isAutoGen() {
-		return isAutoGen;
+	public Boolean getAutoGen() {
+		return autoGen;
 	}
-
-	public void setAutoGen(boolean isAutoGen) {
-		this.isAutoGen = isAutoGen;
+	public void setAutoGen(Boolean autoGen) {
+		this.autoGen = autoGen;
 	}
-
 	public RelationModel getRelation() {
 		return relation;
 	}
-
 	public void setRelation(RelationModel relation) {
 		this.relation = relation;
 	}
-
+	
+	
 }

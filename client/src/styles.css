@@ -1,3 +1,112 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: #f4f4f2;
+}
 
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.sections .title {
+  padding: 15px;
+  border-bottom: 1px solid #f4f4f2;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.sections .content {
+  padding: 15px;
+}
+
+.logo {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.checkboxInline {
+  margin-bottom: 0.8rem !important;
+}
+
+.MenuBarBtn {
+  background: #007bff;
+  position: fixed;
+  left: 0;
+  top:60px;
+  z-index: 999;
+  color: #fff !important;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+header {
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff; position: fixed; width:100%; z-index: 999; top:0;
+}
+
+.sidebar {
+  display: none;
+  background:#0071ea;
+  color: #fff; position: fixed; width:100%; z-index: 999;     top: 44px;
+    max-width: 200px;
+    height: 100%;
+}
+.body-content{
+    margin-top:45px;
+}
+.Menu.active .sidebar{
+    display: block !important;
+}
+.sidebar ul{
+ list-style: none; padding: 0;   
+}
+.sidebar ul li{
+    display: block;
+}
+.sidebar ul li a{
+       border-bottom: 1px solid #006ce0;
+    padding: 5px 10px;
+    width: 100%;
+    display: block;
+    color: #fff;
+}
+.sidebar ul li a:hover{
+    background: #006ce0;
+    text-decoration: none;
+}
+.Menu.active .MenuBarBtn{
+left: 200px;
+}
+.Menu.active .MenuBarBtn .fa-cogs:before{
+    content: "\f00d" !important;
+}
+
+.floatingForm .form-control {
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  box-shadow: 0 0 0 0;
+  padding-left: 0;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.floatingForm textarea {
+  border-width: 1px 1px 1px 1px !important;
+  min-height: 100px;
+}
+
+.floatingForm .floating-label {
+  position: absolute;
+  z-index: 0;
+  transition: 0.2s;
+  top: 5px;
+}
+
+.floatingForm .form-control:focus + .floating-label, .floatingForm .form-control:not(:focus):valid ~ .floating-label {
+  top: -9px;
+  font-size: 10px;
+  color: #213ea7;
+}
+
+.floatingForm .form-group {
+  margin-bottom: 25px;
+}

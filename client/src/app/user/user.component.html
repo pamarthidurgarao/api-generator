@@ -1,0 +1,33 @@
+<header>
+    <div class="container-fluid">
+        <div class="row m-0">
+            <div class="col-6 p-0"><span class="logo">API Report Generator</span></div>
+            <div class="col-6 p-0 text-right">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nagarjuna Tamrada</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" routerLink="/signin">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="Menu {{sideBar}}">
+    <aside class="sidebar">
+        <ul>
+            <li><a routerLink="/user/ReportGeneratorView">Create Report</a></li>
+            <li><a routerLink="/user/ReportGeneratorView">Entity</a></li>
+            <li><a routerLink="/user/ReportGeneratorView">Relationship</a></li>
+            <li><a routerLink="/user/ReportGeneratorView">tutorial</a></li>
+            <li><a routerLink="/user/ReportGeneratorView">Help</a></li>
+            <li><a routerLink="/user/ReportGeneratorView">Contact</a></li>
+        </ul>
+    </aside>
+    <main class="container-fluid body-content py-3">
+        <a class="settingBtn MenuBarBtn" (click)="toggle()"><i class="fas fa-cogs"></i></a>
+        <router-outlet></router-outlet>
+    </main>
+</div>
