@@ -13,28 +13,28 @@ import { AppService } from '../../service/app.service';
 export class ReportGeneratorViewComponent implements OnInit {
 
   appModel: AppModel;
-  formMode='Add';
+  formMode = 'Add';
 
   entityForm: FormGroup;
   columns: any[] = [];
 
-  constructor(private fb: FormBuilder,private appService:AppService) { }
+  constructor(private fb: FormBuilder, private appService: AppService) { }
 
   ngOnInit() {
     this.appModel = new AppModel();
     this.appModel.entites = new Array<EntityModel>();
-    this.appModel.appName='';
-    this.appModel.packageName='';
-    if(localStorage.getItem('data')){
-      this.appModel=JSON.parse(localStorage.getItem('data'));
+    this.appModel.appName = '';
+    this.appModel.packageName = '';
+    if (localStorage.getItem('data')) {
+      this.appModel = JSON.parse(localStorage.getItem('data'));
     }
     this.init();
   }
 
-  init(){
+  init() {
     this.entityForm = this.fb.group({
       name: '',
-      columns: this.fb.array(this.formMode=='Add'?[this.createItem()]:[])
+      columns: this.fb.array(this.formMode == 'Add' ? [this.createItem()] : [])
     });
   }
 
@@ -46,7 +46,7 @@ export class ReportGeneratorViewComponent implements OnInit {
       primary: false,
       unique: false,
       autoGen: false,
-       relation: this.fb.group({
+      relation: this.fb.group({
         columnName: '',
         tableName: '',
         relationType: ''
@@ -59,34 +59,34 @@ export class ReportGeneratorViewComponent implements OnInit {
     this.columns.push(this.createItem());
   }
   save(): void {
-    if(this.formMode == 'Edit'){
-      this.appModel.entites = this.appModel.entites.filter(data=>data.name!==this.entityForm.value.name)
+    if (this.formMode == 'Edit') {
+      this.appModel.entites = this.appModel.entites.filter(data => data.name !== this.entityForm.value.name)
     }
     const entity = this.entityForm.value;
-    if(!entity.columns.relation || !entity.columns.relation.columnName){
-      entity.columns.forEach(column=>{
-        column.relation={undefined};
+    if (!entity.columns.relation || !entity.columns.relation.columnName) {
+      entity.columns.forEach(column => {
+        column.relation = { undefined };
       })
     }
     debugger
     this.appModel.entites.push(entity);
-    
+
   }
 
-  addForm(){
-    this.formMode='Add';
+  addForm() {
+    this.formMode = 'Add';
     this.init();
   }
-  editForm(entity:EntityModel){
-    this.formMode='Edit';
+  editForm(entity: EntityModel) {
+    this.formMode = 'Edit';
     this.init();
     this.populateForm(entity);
   }
-  populateForm(entity:EntityModel){
+  populateForm(entity: EntityModel) {
     this.entityForm.get('name').setValue(entity.name);
-    let data=<FormArray>this.entityForm.controls.columns;
-    entity.columns.forEach( column=>{
-      const col=this.fb.group({
+    let data = <FormArray>this.entityForm.controls.columns;
+    entity.columns.forEach(column => {
+      const col = this.fb.group({
         name: column.name,
         type: column.type,
         mandatory: column.mandatory,
@@ -94,30 +94,35 @@ export class ReportGeneratorViewComponent implements OnInit {
         unique: column.unique,
         autoGen: column.autoGen,
         relation: this.fb.group(
-          column.relation!==undefined?{
-          columnName: column.relation.columnName,
-          tableName: column.relation.tableName,
-          relationType: column.relation.relationType
-        }:{})
+          column.relation !== undefined ? {
+            columnName: column.relation.columnName,
+            tableName: column.relation.tableName,
+            relationType: column.relation.relationType
+          } : {})
       });
       data.push(col);
     })
   }
 
-  saveLocal(){
+  saveLocal() {
     debugger
-    this.appModel.packageName = 'com.'+this.appModel.appName;
+    this.appModel.packageName = 'com.' + this.appModel.appName;
     localStorage.setItem('data', JSON.stringify(this.appModel));
   }
 
-  build(){
-    this.appModel.packageName = 'com.'+this.appModel.appName;
+  build() {
+    this.appModel.packageName = 'com.' + this.appModel.appName;
     this.appService.build(this.appModel);
   }
 
-  download(){
+  download() {
     this.appService.download(this.appModel.appName);
   }
 
-   dataTypes=['String','Integer','Long','Double','Date','LocalDate','LocalDateTime','Boolean'];
+  remove(index) {
+    let items = this.entityForm.get('columns') as FormArray;
+    items.removeAt(index);
+  }
+
+  dataTypes = ['String', 'Integer', 'Long', 'Double', 'Date', 'LocalDate', 'LocalDateTime', 'Boolean'];
 }
