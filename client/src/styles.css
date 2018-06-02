@@ -18,6 +18,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
+      padding-left:30px;
 }
 
 .checkboxInline {
@@ -25,18 +26,24 @@ body {
 }
 
 .MenuBarBtn {
-  background: #007bff;
-  position: fixed;
-  left: 0;
-  top:60px;
-  z-index: 999;
-  color: #fff !important;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
+      background: #0071ea;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff !important;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 0;
+        height: 100%;
+    display: flex;
+    align-items: center;
+    min-width: 50px;
 }
-
+.MenuBarBtn i{
+  text-align: center; margin: 0 auto;
+}
 header {
   padding: 10px 15px;
   background: #007bff;
@@ -50,8 +57,8 @@ header {
     max-width: 200px;
     height: 100%;
 }
-.body-content{
-    margin-top:45px;
+.Menu.active .body-content{
+    margin-left:200px;
 }
 .Menu.active .sidebar{
     display: block !important;
@@ -72,9 +79,6 @@ header {
 .sidebar ul li a:hover{
     background: #006ce0;
     text-decoration: none;
-}
-.Menu.active .MenuBarBtn{
-left: 200px;
 }
 .Menu.active .MenuBarBtn .fa-cogs:before{
     content: "\f00d" !important;
@@ -109,4 +113,29 @@ left: 200px;
 
 .floatingForm .form-group {
   margin-bottom: 25px;
+}
+.btn{
+  text-transform: uppercase;
+}
+.modal-header{
+    background: #a8c2d9; border-bottom: #a8c2d9;
+    font-weight: 600;
+}
+.loginBlock{
+    background:#000 url('assets/images/background.jpg') no-repeat;
+    height: 100%;
+    width: 100%;
+    background-size: cover; position: fixed;
+    z-index:1;
+}
+.loginBlock .login{
+        max-width: 350px;
+    background: #fff;
+    padding: 20px 20px 25px 20px;
+    width: 100%;
+    margin: 0;
+    right: 0;
+    position: fixed;
+    height: 100%;
+    z-index: 2;
 }

@@ -1,26 +1,37 @@
-<section class="pb-2 text-right form-inline">
-    <label class="col-sm-2" for="exampleCheck1">Application Name</label>
-    <input type="text" class="form-control col-sm-2" id="exampleInputPassword1" [(ngModel)]="appModel.appName" placeholder="Application Name">
-    <a class="edit" data-toggle="modal" data-target="#edit" (click)="addForm()"><i class="fas fa-plus-square"></i></a>
-    <a class="btn btn-primary" (click)="saveLocal()">Save</a>
-    <a class="btn btn-primary" (click)="build()">Build</a>
-    <a class="btn btn-primary" href="/api/download?fileName={{appModel.appName}}">Download</a>
+<section class="bg-white p-3 mb-2">
+    <div class="row">
+        <div class="col-6 form-inline">
+            <label class="pr-2">Application Name :</label>
+            <input type="text" class="form-control mr-2" [(ngModel)]="appModel.appName" />
+        </div>
+        <div class="col-6 text-right">
+            <div class="btn-group">
+                <button type="button" class="edit btn btn-outline-secondary" data-toggle="modal" data-target="#edit" (click)="addForm()"><i class="fas fa-plus-square"></i></button>
+                <button type="button" class="btn btn-outline-secondary" (click)="saveLocal()"><i class="far fa-save"></i></button>
+                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#relationship"><i class="fas fa-link"></i></button>
+                <button type="button" class="btn btn-outline-secondary" (click)="build()"><i class="fab fa-simplybuilt"></i></button>
+                <a class="btn btn-outline-secondary" href="/api/download?fileName={{appModel.appName}}"><i class="fas fa-download"></i></a>
+            </div>
+        </div>
+    </div>
+
 </section>
 <section class="bg-white p-2">
-
-
     <div class="reports">
         <!--Card Start-->
-        <div class="d-flex justify-content-center bd-highlight mb-3" *ngFor="let entity of appModel.entites">
-            <div class="p-2 bd-highlight">
-                <div class="card position-relative">
+        <div class="row mb-3">
+            <div class="col-sm-4 pb-4" *ngFor="let entity of appModel.entites">
+                <div class="card position-relative rounded-0">
                     <div class="card-body">
                         <a class="edit" data-toggle="modal" data-target="#edit" (click)="editForm(entity)"><i class="far fa-edit"></i></a>
                         <a class="delete"><i class="far fa-window-close"></i></a>
                         <h3>{{entity.name}}</h3>
-                        <ul>
-                            <li *ngFor="let column of entity.columns">{{column.name}} {{column.type}}</li>
-                        </ul>
+                        <table class="table table-bordered">
+                            <tr *ngFor="let column of entity.columns">
+                                <td>{{column.name}}</td>
+                                <td>{{column.type}}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -35,35 +46,28 @@
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <form [formGroup]="entityForm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{formMode}}</h5>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="exampleInputPassword1" formControlName="name" placeholder="Table Name">
-                        </div>
-                    </div>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+            <div class="modal-content rounded-0">
+                <div class="modal-header rounded-0">
+                    {{formMode}} Table Details
                 </div>
                 <div class="modal-body">
-                    <div formArrayName="columns" *ngFor="let column of entityForm.get('columns').controls; let col = index;">
-                        <div class="row mb-2" [formGroupName]="col">
+                    <div class="form-inline mb-2">
+                        <label class="mr-2">Table Name:</label>
+                        <input type="text" class="form-control mr-2" id="exampleInputPassword1" formControlName="name" placeholder="Table Name">
+                        <button type="button" class="btn btn-primary" (click)="addItem()">Add Column</button>
+                    </div>
+                    <div class="position-relative my-2 AddDynamicColmn" formArrayName="columns" *ngFor="let column of entityForm.get('columns').controls; let col = index;">
+                        <div class="row" [formGroupName]="col">
                             <div class="col-sm-3">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="name" placeholder="Column Name">
-                                </div>
+                                <input type="text" class="form-control" id="exampleInputPassword1" formControlName="name" placeholder="Column Name">
                             </div>
                             <div class="col-sm-3">
-                                <div class="form-group">
-                                    <select class="form-control" id="exampleFormControlSelect1" formControlName="type" placeholder="Data Type">
+                                <select class="form-control" id="exampleFormControlSelect1" formControlName="type" placeholder="Data Type">
                                         <option *ngFor="let dataType of dataTypes" [value]="dataType">{{dataType}}</option>
                                     </select>
-                                </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="form-group form-inline mb-1 mt-1">
+                                <div class="form-inline mb-1 mt-1">
                                     <div class="form-check pr-4">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="mandatory">
                                         <label class="form-check-label" for="exampleCheck1">Nullable</label>
@@ -76,18 +80,76 @@
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="autoGen">
                                         <label class="form-check-label" for="exampleCheck1">Auto Gene</label>
                                     </div>
-                                    <button type="button" class="close" (click)="remove(col)"><span aria-hidden="true">&times;</span></button>
+                                    <a class="close" (click)="remove(col)"><i class="far fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <p>{{entityForm.value|json}}</p> -->
+                </div>
+                <div class="modal-footer rounded-0">
+                    <button type="button" #saveBtn class="btn btn-secondary" data-dismiss="modal" (click)="save()">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="relationship" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <form [formGroup]="entityForm">
+            <div class="modal-content rounded-0">
+                <div class="modal-header rounded-0">
+                    Relation Table Details
+                </div>
+                <div class="modal-body">
+                    <div class="form-inline mb-2">
+                        <label class="mr-2">Table Name:</label>
+                        <select class="form-control mr-2">
+                            <option>sdfsdf</option>
+                        </select>
+                        <button type="button" class="btn btn-primary" (click)="addItem()">Add Column</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="position-relative my-2 AddDynamicColmn">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <select class="form-control mr-2">
+                            <option>sdfsdf</option>
+                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <select class="form-control mr-2">
+                            <option>sdfsdf</option>
+                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<div class="col-sm-6">
+                            <div class="position-relative my-2 AddDynamicColmn">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <select class="form-control mr-2">
+                            <option>sdfsdf</option>
+                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <select class="form-control mr-2">
+                            <option>sdfsdf</option>
+                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-                    <!-- <p>{{entityForm.value|json}}</p> -->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" #saveBtn class="btn btn-secondary" data-dismiss="modal" (click)="save()">Save</button>
-                    <button type="button" class="btn btn-primary" (click)="addItem()">Add Column</button>
+                <div class="modal-footer rounded-0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                 </div>
             </div>
         </form>

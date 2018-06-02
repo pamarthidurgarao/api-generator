@@ -10,6 +10,46 @@ position: absolute; top:1px; right:5px; cursor: pointer;
 .reports .card{
 min-width: 250px;
 }
-.reports .card ul{
-    list-style: none; padding-left:0rem;
+.reports .card .table{
+    margin-top: 0.6rem; margin-bottom: 0;
+}
+.reports .card .table tr td{
+    padding:0rem 0.5rem 0.3rem 0.5rem;
+}
+.reports h3{
+        font-size: 16px;
+    text-transform: uppercase;
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    margin: 0;
+}
+.reports .card-body{
+    padding: 1.4rem  0.35rem  0.35rem  0.35rem;
+}
+.reports .table-bordered td,.reports .table-bordered th {
+    border: 1px solid #f7f4f4;
+}
+.reports .table-bordered tr{
+    background: #f7f4f4;
+}
+.reports .table-bordered tr:nth-child(even){
+    background: #fff;
+}
+.AddDynamicColmn{
+        background: #f9f9f9;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    border: 1px solid #efefef;
+}
+.AddDynamicColmn .close{
+    position: absolute;
+    right: 12px;
+    top: -4px;
+    color: #F00;
+    font-size: 12px;
+    opacity: 1;
+    font-weight: bold;
+}
+.AddDynamicColmn .close:hover{
+    color: #000;
 }

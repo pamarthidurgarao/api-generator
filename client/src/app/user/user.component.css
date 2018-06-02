@@ -1,0 +1,7 @@
+.dropdown.options .dropdown-menu{
+    margin-top: 12px;
+    border-radius: 0;
+}
+.dropdown.options .dropdown-menu a{
+    border-bottom: 1px solid #f4f4f2;
+}
