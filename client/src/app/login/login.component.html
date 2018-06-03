@@ -3,8 +3,13 @@
     <h1 class="mb-3 logoLogin">API GENERATOR</h1>
     <form class="floatingForm" [formGroup]="loginForm" (ngSubmit)="login()">
       <div class="form-group position-relative">
-        <input type="text" class="form-control relative" formControlName="username" required="">
+        <input type="text" class="form-control relative" formControlName="userName" required>
         <label class="floating-label">User Name<sup>*</sup></label>
+        <div *ngIf="loginForm.controls['userName'].errors && !loginForm.controls['userName'].pristine" class="text-danger mt-1">
+          <div [hidden]="!loginForm.controls['userName'].errors.required">Name is required.</div>
+          <div [hidden]="!loginForm.controls['userName'].errors.pattern">Pattern notmatch.</div>
+          <div [hidden]="!loginForm.controls['userName'].errors.minlength">mininum length 4 charactors required.</div>
+        </div>        
       </div>
       <div class="form-group position-relative">
         <input type="password" name="password" class="form-control relative" formControlName="password" required="">
@@ -13,7 +18,8 @@
       <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">SIGNIN</button>
       <a class="btn btn-primary" routerLink="/signup">SIGNUP</a>
     </form>
-    <!--<p>{{loginForm.value|json}}</p>
-    <p>{{loginForm.valid|json}}</p>-->
+    <p>{{loginForm.value|json}}</p>
+    <p>{{loginForm.valid|json}}</p>
+
   </div>
 </section>

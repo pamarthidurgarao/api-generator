@@ -15,14 +15,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      //userName: ['', Validators.required],
+      userName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.pattern('^[a-zA-Z]*$')
+      ]),
       password: ['', Validators.required]
     });
   }
 
   login() {
     this.loginModel = this.loginForm.value;
-    if (this.loginModel.username == 'user' && this.loginModel.password == 'user') {
+    if (this.loginModel.userName == 'user' && this.loginModel.password == 'user') {
       this.router.navigate(['user/home']);
     }
     else {
