@@ -1,29 +1,31 @@
 <section class="loginBlock">
   <div class="login">
     <h1 class="mb-3 logoLogin">API GENERATOR</h1>
-    <form class="floatingForm">
+    <form class="floatingForm" [formGroup]="signUpForm" (ngSubmit)="signup()">
       <div class="form-group position-relative">
-        <input type="text" class="form-control relative" required="">
+        <input type="text" class="form-control relative" formControlName="UserName" required="">
         <label class="floating-label">User Name<sup>*</sup></label>
       </div>
       <div class="form-group position-relative">
-        <input type="text" class="form-control relative" required="">
+        <input type="text" class="form-control relative" formControlName="Email" required="">
         <label class="floating-label">Email Address<sup>*</sup></label>
       </div>
       <div class="form-group position-relative">
-        <input type="text" class="form-control relative" required="">
+        <input type="text" class="form-control relative" formControlName="Phone" required="">
         <label class="floating-label">Phone Number<sup>*</sup></label>
       </div>
       <div class="form-group position-relative">
-        <input type="text" class="form-control relative" required="">
+        <input type="text" class="form-control relative" formControlName="Location" required="">
         <label class="floating-label">Location<sup>*</sup></label>
       </div>
       <div class="form-group position-relative">
-        <input type="text" class="form-control relative" required="">
+        <input type="text" class="form-control relative" formControlName="Password" required="">
         <label class="floating-label">Password<sup>*</sup></label>
       </div>
-      <a class="btn btn-primary" routerLink="/user/home">SIGNIN</a>
-      <a class="btn btn-primary" routerLink="/signup">SIGNUP</a>
-  </form>
+      <button class="btn btn-primary" type="submit" [disabled]="!signUpForm.valid">Create Account</button>
+      <a class="btn btn-dark" routerLink="/login">back to login</a>
+      <!--<p>{{signUpForm.value|json}}</p>
+      <p>{{signUpForm.valid|json}}</p>-->
+    </form>
   </div>
 </section>

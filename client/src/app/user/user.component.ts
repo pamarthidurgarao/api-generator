@@ -6,19 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
-  sideBar='active';
+  username = 'Nagarjuna Tamarada';
+  sideBar = 'active';
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggle(){
-    if(this.sideBar){
-      this.sideBar=null;
-  }else{
-    this.sideBar='active';
+  toggle() {
+    if (this.sideBar) {
+      this.sideBar = null;
+    } else {
+      this.sideBar = 'active';
+    }
   }
-}
 
 }

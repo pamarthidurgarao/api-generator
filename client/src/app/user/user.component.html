@@ -7,7 +7,7 @@
                 <span class="logo">API Report Generator</span></div>
             <div class="col-6 p-0 text-right">
                 <div class="dropdown options">
-                    <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nagarjuna Tamrada</a>
+                    <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{username}}</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Profile</a>
@@ -20,12 +20,13 @@
 </header>
     <aside class="sidebar">
         <ul>
-            <li><a routerLink="/user/ReportGeneratorView">Create Report</a></li>
-            <li><a routerLink="/user/ReportGeneratorView">Entity</a></li>
-            <li><a routerLink="/user/ReportGeneratorView">Relationship</a></li>
-            <li><a routerLink="/user/ReportGeneratorView">tutorial</a></li>
-            <li><a routerLink="/user/ReportGeneratorView">Help</a></li>
-            <li><a routerLink="/user/ReportGeneratorView">Contact</a></li>
+            <li><a routerLink="/user/home" routerLinkActive="active">Home</a></li>
+            <li><a routerLink="/user/ReportGeneratorView" routerLinkActive="active">Create Report</a></li>
+            <li><a href="#">Entity</a></li>
+            <li><a href="#">Relationship</a></li>
+            <li><a href="#">tutorial</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </aside>
     <main class="container-fluid py-3">

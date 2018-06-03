@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Lobster&subset=cyrillic,cyrillic-ext,latin-ext,vietnamese');
 body {
   background: #f4f4f2;
 }
@@ -18,7 +19,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-      padding-left:30px;
+  padding-left:30px;
 }
 
 .checkboxInline {
@@ -76,8 +77,8 @@ header {
     display: block;
     color: #fff;
 }
-.sidebar ul li a:hover{
-    background: #006ce0;
+.sidebar ul li a:hover,.sidebar ul li a.active{
+    background: #0164ce;
     text-decoration: none;
 }
 .Menu.active .MenuBarBtn .fa-cogs:before{
@@ -100,7 +101,7 @@ header {
 
 .floatingForm .floating-label {
   position: absolute;
-  z-index: 0;
+  z-index:-1;
   transition: 0.2s;
   top: 5px;
 }
