@@ -137,6 +137,21 @@ var AppModel = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/dto/relationmodel.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RelationModel; });
+var RelationModel = /** @class */ (function () {
+    function RelationModel() {
+    }
+    return RelationModel;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/login/login.component.css":
 /***/ (function(module, exports) {
 
@@ -360,7 +375,7 @@ module.exports = ".modal-lg{\r\n    max-width: 1200px;\r\n}\r\n.reports .edit{\r
 /***/ "./src/app/user/report-generator-view/report-generator-view.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"bg-white p-3 mb-2\">\r\n    <div class=\"row\">\r\n        <div class=\"col-6 form-inline\">\r\n            <label class=\"pr-2\">Application Name :</label>\r\n            <input type=\"text\" class=\"form-control mr-2\" [(ngModel)]=\"appModel.appName\" />\r\n        </div>\r\n        <div class=\"col-6 text-right\">\r\n            <div class=\"btn-group\">\r\n                <button type=\"button\" class=\"edit btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"addForm()\"><i class=\"fas fa-plus-square\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"saveLocal()\"><i class=\"far fa-save\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#relationship\"><i class=\"fas fa-link\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"build()\"><i class=\"fab fa-simplybuilt\"></i></button>\r\n                <a class=\"btn btn-outline-secondary\" href=\"/api/download?fileName={{appModel.appName}}\"><i class=\"fas fa-download\"></i></a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</section>\r\n<section class=\"bg-white p-2\">\r\n    <div class=\"reports\">\r\n        <!--Card Start-->\r\n        <div class=\"row mb-3\">\r\n            <div class=\"col-sm-4 pb-4\" *ngFor=\"let entity of appModel.entites\">\r\n                <div class=\"card position-relative rounded-0\">\r\n                    <div class=\"card-body\">\r\n                        <a class=\"edit\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"editForm(entity)\"><i class=\"far fa-edit\"></i></a>\r\n                        <a class=\"delete\"><i class=\"far fa-window-close\"></i></a>\r\n                        <h3>{{entity.name}}</h3>\r\n                        <table class=\"table table-bordered\">\r\n                            <tr *ngFor=\"let column of entity.columns\">\r\n                                <td>{{column.name}}</td>\r\n                                <td>{{column.type}}</td>\r\n                            </tr>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--Card end-->\r\n    </div>\r\n    <!-- <p>{{appModel|json}}</p> -->\r\n</section>\r\n\r\n<div class=\"modal fade\" id=\"edit\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\r\n        <form [formGroup]=\"entityForm\">\r\n            <div class=\"modal-content rounded-0\">\r\n                <div class=\"modal-header rounded-0\">\r\n                    {{formMode}} Table Details\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"form-inline mb-2\">\r\n                        <label class=\"mr-2\">Table Name:</label>\r\n                        <input type=\"text\" class=\"form-control mr-2\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Table Name\">\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addItem()\">Add Column</button>\r\n                    </div>\r\n                    <div class=\"position-relative my-2 AddDynamicColmn\" formArrayName=\"columns\" *ngFor=\"let column of entityForm.get('columns').controls; let col = index;\">\r\n                        <div class=\"row\" [formGroupName]=\"col\">\r\n                            <div class=\"col-sm-3\">\r\n                                <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Column Name\">\r\n                            </div>\r\n                            <div class=\"col-sm-3\">\r\n                                <select class=\"form-control\" id=\"exampleFormControlSelect1\" formControlName=\"type\" placeholder=\"Data Type\">\r\n                                        <option *ngFor=\"let dataType of dataTypes\" [value]=\"dataType\">{{dataType}}</option>\r\n                                    </select>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-inline mb-1 mt-1\">\r\n                                    <div class=\"form-check pr-4\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"mandatory\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Nullable</label>\r\n                                    </div>\r\n                                    <div class=\"form-check pr-4\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"primary\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Primary Key</label>\r\n                                    </div>\r\n                                    <div class=\"form-check\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"autoGen\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Auto Gene</label>\r\n                                    </div>\r\n                                    <a class=\"close\" (click)=\"remove(col)\"><i class=\"far fa-trash-alt\"></i></a>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!-- <p>{{entityForm.value|json}}</p> -->\r\n                </div>\r\n                <div class=\"modal-footer rounded-0\">\r\n                    <button type=\"button\" #saveBtn class=\"btn btn-secondary\" data-dismiss=\"modal\" (click)=\"save()\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"modal fade\" id=\"relationship\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\r\n        <form [formGroup]=\"entityForm\">\r\n            <div class=\"modal-content rounded-0\">\r\n                <div class=\"modal-header rounded-0\">\r\n                    Relation Table Details\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"form-inline mb-2\">\r\n                        <label class=\"mr-2\">Table Name:</label>\r\n                        <select class=\"form-control mr-2\">\r\n                            <option>sdfsdf</option>\r\n                        </select>\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addItem()\">Add Column</button>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\">\r\n                            <option>sdfsdf</option>\r\n                        </select>\r\n                                    </div>\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\">\r\n                            <option>sdfsdf</option>\r\n                        </select>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n<div class=\"col-sm-6\">\r\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\">\r\n                            <option>sdfsdf</option>\r\n                        </select>\r\n                                    </div>\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\">\r\n                            <option>sdfsdf</option>\r\n                        </select>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n                <div class=\"modal-footer rounded-0\">\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<section class=\"bg-white p-3 mb-2\">\r\n    <div class=\"row\">\r\n        <div class=\"col-6 form-inline\">\r\n            <label class=\"pr-2\">Application Name :</label>\r\n            <input type=\"text\" class=\"form-control mr-2\" [(ngModel)]=\"appModel.appName\" />\r\n        </div>\r\n        <div class=\"col-6 text-right\">\r\n            <div class=\"btn-group\">\r\n                <button type=\"button\" class=\"edit btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"addForm()\"><i class=\"fas fa-plus-square\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"saveLocal()\"><i class=\"far fa-save\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#relationship\"><i class=\"fas fa-link\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"build()\"><i class=\"fab fa-simplybuilt\"></i></button>\r\n                <a class=\"btn btn-outline-secondary\" href=\"/api/download?fileName={{appModel.appName}}\"><i class=\"fas fa-download\"></i></a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</section>\r\n<section class=\"bg-white p-2\">\r\n    <div class=\"reports\">\r\n        <!--Card Start-->\r\n        <div class=\"row mb-3\">\r\n            <div class=\"col-sm-4 pb-4\" *ngFor=\"let entity of appModel.entites\">\r\n                <div class=\"card position-relative rounded-0\">\r\n                    <div class=\"card-body\">\r\n                        <a class=\"edit\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"editForm(entity)\"><i class=\"far fa-edit\"></i></a>\r\n                        <a class=\"delete\"><i class=\"far fa-window-close\"></i></a>\r\n                        <h3>{{entity.name}}</h3>\r\n                        <table class=\"table table-bordered\">\r\n                            <tr *ngFor=\"let column of entity.columns\">\r\n                                <td>{{column.name}}</td>\r\n                                <td>{{column.type}}</td>\r\n                            </tr>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--Card end-->\r\n    </div>\r\n     <p>{{appModel|json}}</p> \r\n</section>\r\n\r\n<div class=\"modal fade\" id=\"edit\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\r\n        <form [formGroup]=\"entityForm\">\r\n            <div class=\"modal-content rounded-0\">\r\n                <div class=\"modal-header rounded-0\">\r\n                    {{formMode}} Table Details\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"form-inline mb-2\">\r\n                        <label class=\"mr-2\">Table Name:</label>\r\n                        <input type=\"text\" class=\"form-control mr-2\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Table Name\">\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addItem()\">Add Column</button>\r\n                    </div>\r\n                    <div class=\"position-relative my-2 AddDynamicColmn\" formArrayName=\"columns\" *ngFor=\"let column of entityForm.get('columns').controls; let col = index;\">\r\n                        <div class=\"row\" [formGroupName]=\"col\">\r\n                            <div class=\"col-sm-3\">\r\n                                <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Column Name\">\r\n                            </div>\r\n                            <div class=\"col-sm-3\">\r\n                                <select class=\"form-control\" id=\"exampleFormControlSelect1\" formControlName=\"type\" placeholder=\"Data Type\">\r\n                                        <option *ngFor=\"let dataType of dataTypes\" [value]=\"dataType\">{{dataType}}</option>\r\n                                    </select>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-inline mb-1 mt-1\">\r\n                                    <div class=\"form-check pr-4\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"mandatory\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Nullable</label>\r\n                                    </div>\r\n                                    <div class=\"form-check pr-4\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"primary\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Primary Key</label>\r\n                                    </div>\r\n                                    <div class=\"form-check\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"autoGen\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Auto Gene</label>\r\n                                    </div>\r\n                                    <a class=\"close\" (click)=\"remove(col)\"><i class=\"far fa-trash-alt\"></i></a>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!-- <p>{{entityForm.value|json}}</p> -->\r\n                </div>\r\n                <div class=\"modal-footer rounded-0\">\r\n                    <button type=\"button\" #saveBtn class=\"btn btn-secondary\" data-dismiss=\"modal\" (click)=\"save()\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"modal fade\" id=\"relationship\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\r\n        <form [formGroup]=\"relationForm\">\r\n            <div class=\"modal-content rounded-0\">\r\n                <div class=\"modal-header rounded-0\">\r\n                    Relation Table Details\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"form-inline mb-2\">\r\n                        <label class=\"mr-2\">Relation Type:</label>\r\n                        <select class=\"form-control mr-2\" formControlName=\"type\">\r\n                            <option>ONETOMANY</option>\r\n                            <option>MANYTOONE</option>\r\n                            <option>MANYTOMANY</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceTable\" (change)=\"sourceTableChange($event.target.value)\">\r\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceColumn\" >\r\n                                        <option *ngFor=\"let column of sourceColumns\" [value]=\"column\">{{column}}</option>\r\n                                       </select>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"targetTable\" (change)=\"targetTableChange($event.target.value)\">\r\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"targetColumn\">\r\n                                        <option *ngFor=\"let column of targetColumns\" [value]=\"column\">{{column}}</option>\r\n                                       </select>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n                <div class=\"modal-footer rounded-0\">\r\n                    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"saveRelation()\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\r\n                </div>\r\n            </div>\r\n            <!-- <p>{{relationForm.value|json}}</p> -->\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -372,7 +387,8 @@ module.exports = "<section class=\"bg-white p-3 mb-2\">\r\n    <div class=\"row\
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dto_appmodel__ = __webpack_require__("./src/app/dto/appmodel.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__service_app_service__ = __webpack_require__("./src/app/service/app.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dto_relationmodel__ = __webpack_require__("./src/app/dto/relationmodel.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_app_service__ = __webpack_require__("./src/app/service/app.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -386,12 +402,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ReportGeneratorViewComponent = /** @class */ (function () {
     function ReportGeneratorViewComponent(fb, appService) {
         this.fb = fb;
         this.appService = appService;
         this.formMode = 'Add';
         this.columns = [];
+        this.sourceColumns = [];
+        this.targetColumns = [];
         this.dataTypes = ['String', 'Integer', 'Long', 'Double', 'Date', 'LocalDate', 'LocalDateTime', 'Boolean'];
     }
     ReportGeneratorViewComponent.prototype.ngOnInit = function () {
@@ -408,6 +427,13 @@ var ReportGeneratorViewComponent = /** @class */ (function () {
         this.entityForm = this.fb.group({
             name: '',
             columns: this.fb.array(this.formMode == 'Add' ? [this.createItem()] : [])
+        });
+        this.relationForm = this.fb.group({
+            type: '',
+            sourceTable: '',
+            sourceColumn: '',
+            targetTable: '',
+            targetColumn: ''
         });
     };
     ReportGeneratorViewComponent.prototype.createItem = function () {
@@ -490,13 +516,72 @@ var ReportGeneratorViewComponent = /** @class */ (function () {
         var items = this.entityForm.get('columns');
         items.removeAt(index);
     };
+    ReportGeneratorViewComponent.prototype.targetTableChange = function (targetTable) {
+        var _this = this;
+        this.targetColumns = [];
+        this.appModel.entites.forEach(function (entity) {
+            if (entity.name === targetTable) {
+                entity.columns.forEach(function (column) {
+                    _this.targetColumns.push(column.name);
+                });
+            }
+        });
+    };
+    ReportGeneratorViewComponent.prototype.sourceTableChange = function (sourceTable) {
+        var _this = this;
+        this.sourceColumns = [];
+        this.appModel.entites.forEach(function (entity) {
+            if (entity.name === sourceTable) {
+                entity.columns.forEach(function (column) {
+                    _this.sourceColumns.push(column.name);
+                });
+            }
+        });
+    };
+    ReportGeneratorViewComponent.prototype.saveRelation = function () {
+        var relation = this.relationForm.value;
+        this.appModel.entites.forEach(function (entity) {
+            debugger;
+            if (entity.name === relation.sourceTable) {
+                entity.columns.forEach(function (column) {
+                    if (column.name === relation.sourceColumn) {
+                        var relationModel = new __WEBPACK_IMPORTED_MODULE_3__dto_relationmodel__["a" /* RelationModel */]();
+                        relationModel.columnName = relation.targetColumn;
+                        relationModel.relationType = relation.type;
+                        relationModel.tableName = relation.targetTable;
+                        column.relation = relationModel;
+                    }
+                });
+            }
+            else if (entity.name === relation.targetTable) {
+                entity.columns.forEach(function (column) {
+                    if (column.name === relation.targetColumn) {
+                        var relationModel = new __WEBPACK_IMPORTED_MODULE_3__dto_relationmodel__["a" /* RelationModel */]();
+                        relationModel.columnName = relation.targetColumn;
+                        if (relation.type === "ONETOMANY") {
+                            var type = "MANYTOONE";
+                            relationModel.relationType = type;
+                        }
+                        else if (relation.type === "MANYTOONE") {
+                            var type = "ONETOMANY";
+                            relationModel.relationType = type;
+                        }
+                        else
+                            relationModel.relationType = relation.type;
+                        relationModel.tableName = relation.targetTable;
+                        column.relation = relationModel;
+                    }
+                });
+            }
+        });
+    };
     ReportGeneratorViewComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-report-generator-view',
             template: __webpack_require__("./src/app/user/report-generator-view/report-generator-view.component.html"),
             styles: [__webpack_require__("./src/app/user/report-generator-view/report-generator-view.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__service_app_service__["a" /* AppService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__service_app_service__["a" /* AppService */]])
     ], ReportGeneratorViewComponent);
     return ReportGeneratorViewComponent;
 }());

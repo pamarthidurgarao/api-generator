@@ -40,7 +40,7 @@
 
         <!--Card end-->
     </div>
-    <!-- <p>{{appModel|json}}</p> -->
+     <p>{{appModel|json}}</p> 
 </section>
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,48 +98,49 @@
 
 <div class="modal fade" id="relationship" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form [formGroup]="entityForm">
+        <form [formGroup]="relationForm">
             <div class="modal-content rounded-0">
                 <div class="modal-header rounded-0">
                     Relation Table Details
                 </div>
                 <div class="modal-body">
                     <div class="form-inline mb-2">
-                        <label class="mr-2">Table Name:</label>
-                        <select class="form-control mr-2">
-                            <option>sdfsdf</option>
+                        <label class="mr-2">Relation Type:</label>
+                        <select class="form-control mr-2" formControlName="type">
+                            <option>ONETOMANY</option>
+                            <option>MANYTOONE</option>
+                            <option>MANYTOMANY</option>
                         </select>
-                        <button type="button" class="btn btn-primary" (click)="addItem()">Add Column</button>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="position-relative my-2 AddDynamicColmn">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <select class="form-control mr-2">
-                            <option>sdfsdf</option>
-                        </select>
+                                        <select class="form-control mr-2" formControlName="sourceTable" (change)="sourceTableChange($event.target.value)">
+                                            <option *ngFor="let table of appModel.entites" [value]="table.name">{{table.name}}</option>
+                                        </select>
                                     </div>
                                     <div class="col-sm-6">
-                                        <select class="form-control mr-2">
-                            <option>sdfsdf</option>
-                        </select>
+                                        <select class="form-control mr-2" formControlName="sourceColumn" >
+                                        <option *ngFor="let column of sourceColumns" [value]="column">{{column}}</option>
+                                       </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-<div class="col-sm-6">
+                        <div class="col-sm-6">
                             <div class="position-relative my-2 AddDynamicColmn">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <select class="form-control mr-2">
-                            <option>sdfsdf</option>
-                        </select>
+                                        <select class="form-control mr-2" formControlName="targetTable" (change)="targetTableChange($event.target.value)">
+                                            <option *ngFor="let table of appModel.entites" [value]="table.name">{{table.name}}</option>
+                                        </select>
                                     </div>
                                     <div class="col-sm-6">
-                                        <select class="form-control mr-2">
-                            <option>sdfsdf</option>
-                        </select>
+                                        <select class="form-control mr-2" formControlName="targetColumn">
+                                        <option *ngFor="let column of targetColumns" [value]="column">{{column}}</option>
+                                       </select>
                                     </div>
                                 </div>
                             </div>
@@ -148,10 +149,11 @@
 
                 </div>
                 <div class="modal-footer rounded-0">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-secondary" (click)="saveRelation()">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                 </div>
             </div>
+            <!-- <p>{{relationForm.value|json}}</p> -->
         </form>
     </div>
 </div>

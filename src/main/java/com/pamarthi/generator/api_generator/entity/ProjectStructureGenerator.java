@@ -8,7 +8,7 @@ public class ProjectStructureGenerator {
 
 	public static void generator(String apiName) {
 		apiName = apiName.toLowerCase();
-
+		createTemp();
 		File apiDir = new File(systemPath + "/" + apiName);
 
 		if (apiDir.exists()) {
@@ -47,6 +47,13 @@ public class ProjectStructureGenerator {
 			dir.delete();
 		} else {
 			dir.delete();
+		}
+	}
+
+	public static void createTemp() {
+		File file = new File(systemPath + "/output");
+		if (!file.exists()) {
+			file.mkdir();
 		}
 	}
 }

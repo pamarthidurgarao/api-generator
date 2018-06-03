@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { AppModel } from '../../dto/appmodel'
 import { EntityModel } from '../../dto/entitymodel'
 import { ColumnModel } from '../../dto/columnmodel';
+import { RelationModel } from '../../dto/relationmodel';
+import { RelationType } from '../../dto/relationtype';
 import { AppService } from '../../service/app.service';
 
 @Component({
@@ -16,7 +18,10 @@ export class ReportGeneratorViewComponent implements OnInit {
   formMode = 'Add';
 
   entityForm: FormGroup;
+  relationForm: FormGroup;
   columns: any[] = [];
+  sourceColumns = [];
+  targetColumns = [];
 
   constructor(private fb: FormBuilder, private appService: AppService) { }
 
@@ -35,6 +40,14 @@ export class ReportGeneratorViewComponent implements OnInit {
     this.entityForm = this.fb.group({
       name: '',
       columns: this.fb.array(this.formMode == 'Add' ? [this.createItem()] : [])
+    });
+
+    this.relationForm = this.fb.group({
+      type: '',
+      sourceTable: '',
+      sourceColumn: '',
+      targetTable: '',
+      targetColumn: ''
     });
   }
 
@@ -123,6 +136,63 @@ export class ReportGeneratorViewComponent implements OnInit {
     let items = this.entityForm.get('columns') as FormArray;
     items.removeAt(index);
   }
+  targetTableChange(targetTable) {
+    this.targetColumns = [];
+    this.appModel.entites.forEach(entity => {
+      if (entity.name === targetTable) {
+        entity.columns.forEach(column => {
+          this.targetColumns.push(column.name);
+        });
+      }
+    });
+  }
+  sourceTableChange(sourceTable) {
+    this.sourceColumns = [];
+    this.appModel.entites.forEach(entity => {
+      if (entity.name === sourceTable) {
+        entity.columns.forEach(column => {
+          this.sourceColumns.push(column.name);
+        });
+      }
+    });
+  }
 
+  saveRelation() {
+    let relation = this.relationForm.value;
+    this.appModel.entites.forEach(entity => {
+      debugger
+      if (entity.name === relation.sourceTable) {
+        entity.columns.forEach(column => {
+          if (column.name === relation.sourceColumn) {
+            let relationModel = new RelationModel();
+            relationModel.columnName = relation.targetColumn;
+            relationModel.relationType = relation.type;
+            relationModel.tableName = relation.targetTable;
+            column.relation = relationModel;
+          }
+        });
+      } else if (entity.name === relation.targetTable) {
+        entity.columns.forEach(column => {
+          if (column.name === relation.targetColumn) {
+            let relationModel = new RelationModel();
+            relationModel.columnName = relation.targetColumn;
+            if (relation.type === "ONETOMANY") {
+              let type: any = "MANYTOONE";
+              relationModel.relationType = type;
+            }
+            else if (relation.type === "MANYTOONE") {
+              let type: any = "ONETOMANY";
+              relationModel.relationType = type;
+            }
+            else
+              relationModel.relationType = relation.type;
+            relationModel.tableName = relation.targetTable;
+            column.relation = relationModel;
+
+          }
+        });
+      }
+    });
+  }
   dataTypes = ['String', 'Integer', 'Long', 'Double', 'Date', 'LocalDate', 'LocalDateTime', 'Boolean'];
 }

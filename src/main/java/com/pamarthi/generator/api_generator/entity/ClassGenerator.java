@@ -14,6 +14,8 @@ import com.pamarthi.generator.api_generator.util.Utils;
 
 public class ClassGenerator {
 
+	public static String systemPath = System.getProperty("java.io.tmpdir");
+
 	public static void generate(String file, String content) {
 		File sourceFile = new File(file);
 		FileWriter writer;
@@ -26,11 +28,11 @@ public class ClassGenerator {
 			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 			StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
 
-			fileManager.setLocation(StandardLocation.CLASS_OUTPUT, Arrays.asList(new File("/tmp/output")));
+			fileManager.setLocation(StandardLocation.CLASS_OUTPUT, Arrays.asList(new File(systemPath + "/output")));
 			compiler.getTask(null, fileManager, null, null, null,
 					fileManager.getJavaFileObjectsFromFiles(Arrays.asList(sourceFile))).call();
 			fileManager.close();
-			File dir = new File("/tmp/output");
+			File dir = new File(systemPath+"/output");
 			ClassLoader myClassLoader = ClassLoader.getSystemClassLoader();
 			myClassLoader.loadClass("com.app.doit.user.User");
 			loadClasses(dir);

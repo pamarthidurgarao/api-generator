@@ -91,7 +91,7 @@ public class SetterGetterGenerator {
 		String column = "\"" + columnModel.getRelation().getColumnName() + "\"";
 		if (RelationType.MANYTOONE == columnModel.getRelation().getRelationType()) {
 			builder.append("\t@ManyToOne\n");
-			builder.append("\t@JoinColumn(name=" + column + ")\n");
+			builder.append("\t@JoinColumn(name=" + column + ", nullable = false)\n");
 			builder.append("\tprivate " + tableName + " " + columnModel.getName() + ";\n\n");
 		}
 		if (RelationType.MANYTOMANY == columnModel.getRelation().getRelationType()) {
@@ -99,7 +99,7 @@ public class SetterGetterGenerator {
 		}
 		if (RelationType.ONETOMANY == columnModel.getRelation().getRelationType()) {
 			builder.append("\t@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)\n");
-			builder.append("\t@JoinColumn(name=" + column + ")\n");
+//			builder.append("\t@JoinColumn(name=" + column + ")\n");
 			builder.append("\tprivate List<" + tableName + "> " + columnModel.getName() + ";\n");
 
 		}
