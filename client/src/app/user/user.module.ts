@@ -11,7 +11,6 @@ import { UserComponent } from './user.component';
 @NgModule({
   imports: [
     CommonModule,
-
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot([
@@ -23,6 +22,7 @@ import { UserComponent } from './user.component';
       }
     ])
   ],
+  providers: [],
   declarations: [HomeComponent, ReportGeneratorViewComponent, UserComponent]
 })
 export class UserModule { }
