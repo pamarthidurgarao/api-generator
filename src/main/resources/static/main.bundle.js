@@ -71,11 +71,12 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_user_module__ = __webpack_require__("./src/app/user/user.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login_component__ = __webpack_require__("./src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__signup_signup_component__ = __webpack_require__("./src/app/signup/signup.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__service_app_service__ = __webpack_require__("./src/app/service/app.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user_user_module__ = __webpack_require__("./src/app/user/user.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login_component__ = __webpack_require__("./src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__signup_signup_component__ = __webpack_require__("./src/app/signup/signup.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__service_app_service__ = __webpack_require__("./src/app/service/app.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -91,28 +92,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__signup_signup_component__["a" /* SignupComponent */]
+                __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__signup_signup_component__["a" /* SignupComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_4__user_user_module__["a" /* UserModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */].forRoot([
-                    { path: '', component: __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */] },
-                    { path: 'signup', component: __WEBPACK_IMPORTED_MODULE_7__signup_signup_component__["a" /* SignupComponent */] },
-                    { path: 'signin', component: __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */] }
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["d" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["c" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_5__user_user_module__["a" /* UserModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */].forRoot([
+                    { path: '', component: __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */] },
+                    { path: 'signup', component: __WEBPACK_IMPORTED_MODULE_8__signup_signup_component__["a" /* SignupComponent */] },
+                    { path: 'signin', component: __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */] },
+                    { path: '**', component: __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */] }
                 ])
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_8__service_app_service__["a" /* AppService */]],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_9__service_app_service__["a" /* AppService */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
@@ -162,7 +167,7 @@ module.exports = ""
 /***/ "./src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"loginBlock\">\r\n  <div class=\"login\">\r\n     <h1 class=\"mb-3 logoLogin\">API GENERATOR</h1>\r\n    <form class=\"floatingForm\">\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" required=\"\">\r\n        <label class=\"floating-label\">User Name<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" required=\"\">\r\n        <label class=\"floating-label\">Password<sup>*</sup></label>\r\n      </div>\r\n      <a class=\"btn btn-primary\" routerLink=\"/user/home\">SIGNIN</a>\r\n      <a class=\"btn btn-primary\" routerLink=\"/signup\">SIGNUP</a>\r\n  </form>\r\n  </div>\r\n</section>"
+module.exports = "<section class=\"loginBlock\">\r\n  <div class=\"login\">\r\n    <h1 class=\"mb-3 logoLogin\">API GENERATOR</h1>\r\n    <form class=\"floatingForm\" [formGroup]=\"loginForm\" (ngSubmit)=\"login()\">\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"userName\" required>\r\n        <label class=\"floating-label\">User Name<sup>*</sup></label>\r\n        <div *ngIf=\"loginForm.controls['userName'].errors && !loginForm.controls['userName'].pristine\" class=\"text-danger mt-1\">\r\n          <div [hidden]=\"!loginForm.controls['userName'].errors.required\">Name is required.</div>\r\n          <div [hidden]=\"!loginForm.controls['userName'].errors.pattern\">Pattern notmatch.</div>\r\n          <div [hidden]=\"!loginForm.controls['userName'].errors.minlength\">mininum length 4 charactors required.</div>\r\n        </div>        \r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"password\" name=\"password\" class=\"form-control relative\" formControlName=\"password\" required=\"\">\r\n        <label class=\"floating-label\">Password<sup>*</sup></label>\r\n      </div>\r\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!loginForm.valid\">SIGNIN</button>\r\n      <a class=\"btn btn-primary\" routerLink=\"/signup\">SIGNUP</a>\r\n    </form>\r\n    <!-- <p>{{loginForm.value|json}}</p>\r\n    <p>{{loginForm.valid|json}}</p> -->\r\n\r\n  </div>\r\n</section>"
 
 /***/ }),
 
@@ -172,6 +177,8 @@ module.exports = "<section class=\"loginBlock\">\r\n  <div class=\"login\">\r\n 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -182,10 +189,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent() {
+    function LoginComponent(fb, router) {
+        this.fb = fb;
+        this.router = router;
     }
     LoginComponent.prototype.ngOnInit = function () {
+        this.loginForm = this.fb.group({
+            //userName: ['', Validators.required],
+            userName: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormControl */]('', [
+                __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required,
+                __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].minLength(4),
+                __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].pattern('^[a-zA-Z]*$')
+            ]),
+            password: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required]
+        });
+    };
+    LoginComponent.prototype.login = function () {
+        this.loginModel = this.loginForm.value;
+        if (this.loginModel.userName == 'user' && this.loginModel.password == 'user') {
+            this.router.navigate(['user/ReportGeneratorView']);
+        }
+        else {
+            console.log('error');
+        }
     };
     LoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -193,7 +222,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/login/login.component.html"),
             styles: [__webpack_require__("./src/app/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -275,7 +304,7 @@ module.exports = ".SignupBlock{\r\n    background:#000 url('background.08c474412
 /***/ "./src/app/signup/signup.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"loginBlock\">\r\n  <div class=\"login\">\r\n    <h1 class=\"mb-3 logoLogin\">API GENERATOR</h1>\r\n    <form class=\"floatingForm\">\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" required=\"\">\r\n        <label class=\"floating-label\">User Name<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" required=\"\">\r\n        <label class=\"floating-label\">Email Address<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" required=\"\">\r\n        <label class=\"floating-label\">Phone Number<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" required=\"\">\r\n        <label class=\"floating-label\">Location<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" required=\"\">\r\n        <label class=\"floating-label\">Password<sup>*</sup></label>\r\n      </div>\r\n      <a class=\"btn btn-primary\" routerLink=\"/user/home\">SIGNIN</a>\r\n      <a class=\"btn btn-primary\" routerLink=\"/signup\">SIGNUP</a>\r\n  </form>\r\n  </div>\r\n</section>"
+module.exports = "<section class=\"loginBlock\">\r\n  <div class=\"login\">\r\n    <h1 class=\"mb-3 logoLogin\">API GENERATOR</h1>\r\n    <form class=\"floatingForm\" [formGroup]=\"signUpForm\" (ngSubmit)=\"signup()\">\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"UserName\" required=\"\">\r\n        <label class=\"floating-label\">User Name<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"Email\" required=\"\">\r\n        <label class=\"floating-label\">Email Address<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"Phone\" required=\"\">\r\n        <label class=\"floating-label\">Phone Number<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"Location\" required=\"\">\r\n        <label class=\"floating-label\">Location<sup>*</sup></label>\r\n      </div>\r\n      <div class=\"form-group position-relative\">\r\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"Password\" required=\"\">\r\n        <label class=\"floating-label\">Password<sup>*</sup></label>\r\n      </div>\r\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!signUpForm.valid\">Create Account</button>\r\n      <a class=\"btn btn-dark\" routerLink=\"/login\">back to login</a>\r\n      <!--<p>{{signUpForm.value|json}}</p>\r\n      <p>{{signUpForm.valid|json}}</p>-->\r\n    </form>\r\n  </div>\r\n</section>"
 
 /***/ }),
 
@@ -285,6 +314,8 @@ module.exports = "<section class=\"loginBlock\">\r\n  <div class=\"login\">\r\n 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -295,10 +326,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var SignupComponent = /** @class */ (function () {
-    function SignupComponent() {
+    function SignupComponent(fb, router) {
+        this.fb = fb;
+        this.router = router;
     }
     SignupComponent.prototype.ngOnInit = function () {
+        this.signUpForm = this.fb.group({
+            UserName: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required],
+            Email: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required],
+            Phone: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required],
+            Location: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required],
+            Password: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required]
+        });
+    };
+    SignupComponent.prototype.signup = function () {
+        this.router.navigate(['user/home']);
     };
     SignupComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -306,7 +351,7 @@ var SignupComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/signup/signup.component.html"),
             styles: [__webpack_require__("./src/app/signup/signup.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
     ], SignupComponent);
     return SignupComponent;
 }());
@@ -325,7 +370,7 @@ module.exports = ""
 /***/ "./src/app/user/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"bg-white sections min-height500\">\r\n    <div class=\"title\">Sed pellentesque sem </div>\r\n    <div class=\"content\">Sed pellentesque sem et posuere congue. Quisque finibus facilisis quam, quis feugiat tortor bibendum eget. Donec interdum\r\n        lectus id leo auctor vulputate. Maecenas viverra, arcu eget volutpat posuere dolor.</div>\r\n</section>"
+module.exports = "<section class=\"bg-white sections min-height500\">\r\n    <div class=\"title\">API Report Generator application</div>\r\n    <div class=\"content\">Sed pellentesque sem et posuere congue. Quisque finibus facilisis quam, quis feugiat tortor bibendum eget. Donec interdum\r\n        lectus id leo auctor vulputate. Maecenas viverra, arcu eget volutpat posuere dolor.</div>\r\n</section>"
 
 /***/ }),
 
@@ -375,7 +420,7 @@ module.exports = ".modal-lg{\r\n    max-width: 1200px;\r\n}\r\n.reports .edit{\r
 /***/ "./src/app/user/report-generator-view/report-generator-view.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"bg-white p-3 mb-2\">\r\n    <div class=\"row\">\r\n        <div class=\"col-6 form-inline\">\r\n            <label class=\"pr-2\">Application Name :</label>\r\n            <input type=\"text\" class=\"form-control mr-2\" [(ngModel)]=\"appModel.appName\" />\r\n        </div>\r\n        <div class=\"col-6 text-right\">\r\n            <div class=\"btn-group\">\r\n                <button type=\"button\" class=\"edit btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"addForm()\"><i class=\"fas fa-plus-square\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"saveLocal()\"><i class=\"far fa-save\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#relationship\"><i class=\"fas fa-link\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"build()\"><i class=\"fab fa-simplybuilt\"></i></button>\r\n                <a class=\"btn btn-outline-secondary\" href=\"/api/download?fileName={{appModel.appName}}\"><i class=\"fas fa-download\"></i></a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</section>\r\n<section class=\"bg-white p-2\">\r\n    <div class=\"reports\">\r\n        <!--Card Start-->\r\n        <div class=\"row mb-3\">\r\n            <div class=\"col-sm-4 pb-4\" *ngFor=\"let entity of appModel.entites\">\r\n                <div class=\"card position-relative rounded-0\">\r\n                    <div class=\"card-body\">\r\n                        <a class=\"edit\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"editForm(entity)\"><i class=\"far fa-edit\"></i></a>\r\n                        <a class=\"delete\"><i class=\"far fa-window-close\"></i></a>\r\n                        <h3>{{entity.name}}</h3>\r\n                        <table class=\"table table-bordered\">\r\n                            <tr *ngFor=\"let column of entity.columns\">\r\n                                <td>{{column.name}}</td>\r\n                                <td>{{column.type}}</td>\r\n                            </tr>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--Card end-->\r\n    </div>\r\n     <p>{{appModel|json}}</p> \r\n</section>\r\n\r\n<div class=\"modal fade\" id=\"edit\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\r\n        <form [formGroup]=\"entityForm\">\r\n            <div class=\"modal-content rounded-0\">\r\n                <div class=\"modal-header rounded-0\">\r\n                    {{formMode}} Table Details\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"form-inline mb-2\">\r\n                        <label class=\"mr-2\">Table Name:</label>\r\n                        <input type=\"text\" class=\"form-control mr-2\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Table Name\">\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addItem()\">Add Column</button>\r\n                    </div>\r\n                    <div class=\"position-relative my-2 AddDynamicColmn\" formArrayName=\"columns\" *ngFor=\"let column of entityForm.get('columns').controls; let col = index;\">\r\n                        <div class=\"row\" [formGroupName]=\"col\">\r\n                            <div class=\"col-sm-3\">\r\n                                <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Column Name\">\r\n                            </div>\r\n                            <div class=\"col-sm-3\">\r\n                                <select class=\"form-control\" id=\"exampleFormControlSelect1\" formControlName=\"type\" placeholder=\"Data Type\">\r\n                                        <option *ngFor=\"let dataType of dataTypes\" [value]=\"dataType\">{{dataType}}</option>\r\n                                    </select>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-inline mb-1 mt-1\">\r\n                                    <div class=\"form-check pr-4\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"mandatory\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Nullable</label>\r\n                                    </div>\r\n                                    <div class=\"form-check pr-4\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"primary\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Primary Key</label>\r\n                                    </div>\r\n                                    <div class=\"form-check\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"autoGen\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Auto Gene</label>\r\n                                    </div>\r\n                                    <a class=\"close\" (click)=\"remove(col)\"><i class=\"far fa-trash-alt\"></i></a>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!-- <p>{{entityForm.value|json}}</p> -->\r\n                </div>\r\n                <div class=\"modal-footer rounded-0\">\r\n                    <button type=\"button\" #saveBtn class=\"btn btn-secondary\" data-dismiss=\"modal\" (click)=\"save()\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"modal fade\" id=\"relationship\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\r\n        <form [formGroup]=\"relationForm\">\r\n            <div class=\"modal-content rounded-0\">\r\n                <div class=\"modal-header rounded-0\">\r\n                    Relation Table Details\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"form-inline mb-2\">\r\n                        <label class=\"mr-2\">Relation Type:</label>\r\n                        <select class=\"form-control mr-2\" formControlName=\"type\">\r\n                            <option>ONETOMANY</option>\r\n                            <option>MANYTOONE</option>\r\n                            <option>MANYTOMANY</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceTable\" (change)=\"sourceTableChange($event.target.value)\">\r\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceColumn\" >\r\n                                        <option *ngFor=\"let column of sourceColumns\" [value]=\"column\">{{column}}</option>\r\n                                       </select>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"targetTable\" (change)=\"targetTableChange($event.target.value)\">\r\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"targetColumn\">\r\n                                        <option *ngFor=\"let column of targetColumns\" [value]=\"column\">{{column}}</option>\r\n                                       </select>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n                <div class=\"modal-footer rounded-0\">\r\n                    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"saveRelation()\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\r\n                </div>\r\n            </div>\r\n            <!-- <p>{{relationForm.value|json}}</p> -->\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<section class=\"bg-white p-3 mb-3\">\r\n    <div class=\"row\">\r\n        <div class=\"col-6 form-inline\">\r\n            <label class=\"pr-2\">Application Name :</label>\r\n            <input type=\"text\" class=\"form-control mr-2\" [(ngModel)]=\"appModel.appName\" />\r\n        </div>\r\n        <div class=\"col-6 text-right\">\r\n            <div class=\"btn-group\">\r\n                <button type=\"button\" class=\"edit btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"addForm()\"\r\n                   title=\"Add Table\"><i class=\"fas fa-plus-square\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"saveLocal()\" title=\"save Files\"><i class=\"far fa-save\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#relationship\" title=\"Relationship\"><i class=\"fas fa-link\"></i></button>\r\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"build()\" title=\"Build\"><i class=\"fab fa-simplybuilt\"></i></button>\r\n                <a class=\"btn btn-outline-secondary\"  title=\"Download Files\" href=\"/api/download?fileName={{appModel.appName}}\"><i class=\"fas fa-download\"></i></a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</section>\r\n<section class=\"clearfix\">\r\n    <div class=\"reports\">\r\n        <!--Card Start-->\r\n        <div class=\"row mb-3\">\r\n            <div class=\"col-sm-4 pb-4\" *ngFor=\"let entity of appModel.entites\">\r\n                <div class=\"card position-relative rounded-0\">\r\n                    <div class=\"card-body\">\r\n                        <a class=\"edit\" title=\"Edit\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"editForm(entity)\"><i class=\"far fa-edit\"></i></a>\r\n                        <a class=\"delete\" title=\"Delete\"><i class=\"far fa-window-close\"></i></a>\r\n                        <h3>{{entity.name}}</h3>\r\n                        <table class=\"table table-bordered\">\r\n                            <tr *ngFor=\"let column of entity.columns\">\r\n                                <td>{{column.name}}</td>\r\n                                <td>{{column.type}}</td>\r\n                            </tr>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--Card end-->\r\n    </div>\r\n     <!-- <p>{{appModel|json}}</p>  -->\r\n</section>\r\n\r\n<div class=\"modal fade\" id=\"edit\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\r\n        <form [formGroup]=\"entityForm\">\r\n            <div class=\"modal-content rounded-0\">\r\n                <div class=\"modal-header rounded-0\">\r\n                    {{formMode}} Table Details\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"form-inline mb-2\">\r\n                        <label class=\"mr-2\">Table Name:</label>\r\n                        <input type=\"text\" class=\"form-control mr-2\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Table Name\">\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addItem()\">Add Column</button>\r\n                    </div>\r\n                    <div class=\"position-relative my-2 AddDynamicColmn\" formArrayName=\"columns\" *ngFor=\"let column of entityForm.get('columns').controls; let col = index;\">\r\n                        <div class=\"row\" [formGroupName]=\"col\">\r\n                            <div class=\"col-sm-3\">\r\n                                <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Column Name\">\r\n                            </div>\r\n                            <div class=\"col-sm-3\">\r\n                                <select class=\"form-control\" id=\"exampleFormControlSelect1\" formControlName=\"type\" placeholder=\"Data Type\">\r\n                                        <option *ngFor=\"let dataType of dataTypes\" [value]=\"dataType\">{{dataType}}</option>\r\n                                    </select>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-inline mb-1 mt-1\">\r\n                                    <div class=\"form-check pr-4\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"mandatory\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Nullable</label>\r\n                                    </div>\r\n                                    <div class=\"form-check pr-4\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"primary\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Primary Key</label>\r\n                                    </div>\r\n                                    <div class=\"form-check\">\r\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"autoGen\">\r\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Auto Gene</label>\r\n                                    </div>\r\n                                    <a class=\"close\" (click)=\"remove(col)\"><i class=\"far fa-trash-alt\"></i></a>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!-- <p>{{entityForm.value|json}}</p> -->\r\n                </div>\r\n                <div class=\"modal-footer rounded-0\">\r\n                    <button type=\"button\" #saveBtn class=\"btn btn-secondary\" data-dismiss=\"modal\" (click)=\"save()\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"modal fade\" id=\"relationship\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\r\n        <form [formGroup]=\"relationForm\">\r\n            <div class=\"modal-content rounded-0\">\r\n                <div class=\"modal-header rounded-0\">\r\n                    Relation Table Details\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"form-inline mb-2\">\r\n                        <label class=\"mr-2\">Relation Type:</label>\r\n                        <select class=\"form-control mr-2\" formControlName=\"type\">\r\n                            <option>ONETOMANY</option>\r\n                            <option>MANYTOONE</option>\r\n                            <option>MANYTOMANY</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceTable\" (change)=\"sourceTableChange($event.target.value)\">\r\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceColumn\" >\r\n                                        <option *ngFor=\"let column of sourceColumns\" [value]=\"column\">{{column}}</option>\r\n                                       </select>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"targetTable\" (change)=\"targetTableChange($event.target.value)\">\r\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"col-sm-6\">\r\n                                        <select class=\"form-control mr-2\" formControlName=\"targetColumn\">\r\n                                        <option *ngFor=\"let column of targetColumns\" [value]=\"column\">{{column}}</option>\r\n                                       </select>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n                <div class=\"modal-footer rounded-0\">\r\n                    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"saveRelation()\">Save</button>\r\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\r\n                </div>\r\n            </div>\r\n            <!-- <p>{{relationForm.value|json}}</p> -->\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -600,7 +645,7 @@ module.exports = ".dropdown.options .dropdown-menu{\r\n    margin-top: 12px;\r\n
 /***/ "./src/app/user/user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"Menu {{sideBar}}\">\r\n<header class=\"position-relative\">\r\n    <div class=\"container-fluid position-static\">\r\n        <div class=\"row m-0\">\r\n            <div class=\"col-6 p-0 position-static\">\r\n                <a class=\"settingBtn MenuBarBtn\" (click)=\"toggle()\"><i class=\"fas fa-cogs\"></i></a>\r\n                <span class=\"logo\">API Report Generator</span></div>\r\n            <div class=\"col-6 p-0 text-right\">\r\n                <div class=\"dropdown options\">\r\n                    <a class=\"dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Nagarjuna Tamrada</a>\r\n                    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\r\n                        <a class=\"dropdown-item\" href=\"#\">Settings</a>\r\n                        <a class=\"dropdown-item\" href=\"#\">Profile</a>\r\n                        <a class=\"dropdown-item border-0\" routerLink=\"/signin\">Logout</a>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</header>\r\n    <aside class=\"sidebar\">\r\n        <ul>\r\n            <li><a routerLink=\"/user/ReportGeneratorView\">Create Report</a></li>\r\n            <li><a routerLink=\"/user/ReportGeneratorView\">Entity</a></li>\r\n            <li><a routerLink=\"/user/ReportGeneratorView\">Relationship</a></li>\r\n            <li><a routerLink=\"/user/ReportGeneratorView\">tutorial</a></li>\r\n            <li><a routerLink=\"/user/ReportGeneratorView\">Help</a></li>\r\n            <li><a routerLink=\"/user/ReportGeneratorView\">Contact</a></li>\r\n        </ul>\r\n    </aside>\r\n    <main class=\"container-fluid py-3\">\r\n        <div class=\"body-content\">\r\n        <router-outlet></router-outlet>\r\n        </div>\r\n    </main>\r\n</div>"
+module.exports = "<div class=\"Menu {{sideBar}}\">\r\n<header class=\"position-relative\">\r\n    <div class=\"container-fluid position-static\">\r\n        <div class=\"row m-0\">\r\n            <div class=\"col-6 p-0 position-static\">\r\n                <a class=\"settingBtn MenuBarBtn\" (click)=\"toggle()\"><i class=\"fas fa-cogs\"></i></a>\r\n                <span class=\"logo\">API Generator</span></div>\r\n            <div class=\"col-6 p-0 text-right\">\r\n                <div class=\"dropdown options\">\r\n                    <a class=\"dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">{{username}}</a>\r\n                    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\r\n                        <a class=\"dropdown-item\" href=\"#\">Settings</a>\r\n                        <a class=\"dropdown-item\" href=\"#\">Profile</a>\r\n                        <a class=\"dropdown-item border-0\" routerLink=\"/signin\">Logout</a>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</header>\r\n    <aside class=\"sidebar\">\r\n        <ul>\r\n            <li><a routerLink=\"/user/home\" routerLinkActive=\"active\">Home</a></li>\r\n            <li><a routerLink=\"/user/ReportGeneratorView\" routerLinkActive=\"active\">Create Report</a></li>\r\n        </ul>\r\n    </aside>\r\n    <main class=\"container-fluid py-3\">\r\n        <div class=\"body-content\">\r\n        <router-outlet></router-outlet>\r\n        </div>\r\n    </main>\r\n</div>"
 
 /***/ }),
 
@@ -622,7 +667,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var UserComponent = /** @class */ (function () {
     function UserComponent() {
-        this.sideBar = 'active';
+        this.username = 'Tamarada';
     }
     UserComponent.prototype.ngOnInit = function () {
     };
@@ -681,9 +726,9 @@ var UserModule = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* ReactiveFormsModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* RouterModule */].forRoot([
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */].forRoot([
                     {
                         path: 'user', component: __WEBPACK_IMPORTED_MODULE_6__user_component__["a" /* UserComponent */], children: [
                             { path: 'home', component: __WEBPACK_IMPORTED_MODULE_4__home_home_component__["a" /* HomeComponent */] },
@@ -692,6 +737,7 @@ var UserModule = /** @class */ (function () {
                     }
                 ])
             ],
+            providers: [],
             declarations: [__WEBPACK_IMPORTED_MODULE_4__home_home_component__["a" /* HomeComponent */], __WEBPACK_IMPORTED_MODULE_5__report_generator_view_report_generator_view_component__["a" /* ReportGeneratorViewComponent */], __WEBPACK_IMPORTED_MODULE_6__user_component__["a" /* UserComponent */]]
         })
     ], UserModule);

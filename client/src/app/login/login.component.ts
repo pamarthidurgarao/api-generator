@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginModel = this.loginForm.value;
     if (this.loginModel.userName == 'user' && this.loginModel.password == 'user') {
-      this.router.navigate(['user/home']);
+      this.router.navigate(['user/ReportGeneratorView']);
     }
     else {
       console.log('error');
