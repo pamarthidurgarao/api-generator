@@ -1,4 +1,4 @@
-import { RelationModel } from './relationmodel'
+import { RelationModel } from './relationmodel';
 
 export class ColumnModel {
      name: string;

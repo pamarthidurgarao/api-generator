@@ -1,6 +1,6 @@
-import { ColumnModel } from './columnmodel'
+import {ColumnModel} from './columnmodel';
 
 export class EntityModel {
-    name: string;
-    columns: Array<ColumnModel>;
+  name: string;
+  columns: Array<ColumnModel>;
 }

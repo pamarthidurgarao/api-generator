@@ -1,9 +1,8 @@
-import { RelationType } from './relationtype'
+import {RelationType} from './relationtype';
 
 export class RelationModel {
-
-     columnName: string;
-     tableName: string;
-     relationType: RelationType;
-
+  source: boolean;
+  columnName: string;
+  tableName: string;
+  relationType: RelationType;
 }

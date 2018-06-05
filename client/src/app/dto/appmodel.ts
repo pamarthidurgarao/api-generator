@@ -1,11 +1,11 @@
-import { EntityModel } from './entitymodel'
+import {EntityModel} from './entitymodel';
 
 export class AppModel {
 
-     appName: string;
+  appName: string;
 
-     packageName: string;
+  packageName: string;
 
-     entites: Array<EntityModel>;
+  entites: Array<EntityModel>;
 
 }

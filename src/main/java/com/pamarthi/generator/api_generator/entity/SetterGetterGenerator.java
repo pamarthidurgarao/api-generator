@@ -29,6 +29,17 @@ public class SetterGetterGenerator {
 				if (RelationType.MANYTOMANY == columnModel.getRelation().getRelationType()) {
 
 				}
+				if (RelationType.ONETOONE == columnModel.getRelation().getRelationType()) {
+					builder.append(setterGen(tableName, columnModel.getName()));
+					if (columnModel.getRelation().getSource()) {
+						builder.append("\t@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)\n\t@JoinColumn(name= \""
+								+ columnModel.getRelation().getColumnName() + "\")\n");
+					} else {
+						builder.append("\t@OneToOne(mappedBy = \""
+								+ columnModel.getRelation().getColumnName() + "\")\n");
+					}
+					builder.append(getterGen(tableName, columnModel.getName()));
+				}
 				if (RelationType.ONETOMANY == columnModel.getRelation().getRelationType()) {
 					builder.append(setterGen("List<" + tableName + ">", columnModel.getName()));
 
@@ -97,9 +108,12 @@ public class SetterGetterGenerator {
 		if (RelationType.MANYTOMANY == columnModel.getRelation().getRelationType()) {
 
 		}
+		if (RelationType.ONETOONE == columnModel.getRelation().getRelationType()) {
+			builder.append("\tprivate " + tableName + " " + columnModel.getName() + ";\n\n");
+		}
 		if (RelationType.ONETOMANY == columnModel.getRelation().getRelationType()) {
 			builder.append("\t@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)\n");
-//			builder.append("\t@JoinColumn(name=" + column + ")\n");
+			// builder.append("\t@JoinColumn(name=" + column + ")\n");
 			builder.append("\tprivate List<" + tableName + "> " + columnModel.getName() + ";\n");
 
 		}

@@ -108,6 +108,7 @@
                     <div class="form-inline mb-2">
                         <label class="mr-2">Relation Type:</label>
                         <select class="form-control mr-2" formControlName="type">
+                            <option>ONETOONE</option>
                             <option>ONETOMANY</option>
                             <option>MANYTOONE</option>
                             <option>MANYTOMANY</option>
@@ -150,7 +151,7 @@
 
                 </div>
                 <div class="modal-footer rounded-0">
-                    <button type="button" class="btn btn-secondary" (click)="saveRelation()">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="saveRelation()">Save</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                 </div>
             </div>
