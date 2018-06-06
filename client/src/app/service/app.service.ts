@@ -7,8 +7,8 @@ import { AppModel } from '../dto/appmodel';
 @Injectable()
 export class AppService {
 
-  url:string='/api/generate';
-  constructor(private http:HttpClient) { }
+  url: string = '/api/generate';
+  constructor(private http: HttpClient) {}
 
   build(app: AppModel) {
     debugger

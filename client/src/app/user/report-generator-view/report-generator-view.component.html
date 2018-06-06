@@ -25,7 +25,7 @@
                 <div class="card position-relative rounded-0">
                     <div class="card-body">
                         <a class="edit" title="Edit" data-toggle="modal" data-target="#edit" (click)="editForm(entity)"><i class="far fa-edit"></i></a>
-                        <a class="delete" title="Delete"><i class="far fa-window-close"></i></a>
+                        <a class="delete" title="Delete" (click)="deleteEntity(entity)"><i class="far fa-window-close"></i></a>
                         <h3>{{entity.name}}</h3>
                         <table class="table table-bordered">
                             <tr *ngFor="let column of entity.columns">

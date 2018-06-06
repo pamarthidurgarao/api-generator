@@ -77,12 +77,16 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login_component__ = __webpack_require__("./src/app/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__signup_signup_component__ = __webpack_require__("./src/app/signup/signup.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__service_app_service__ = __webpack_require__("./src/app/service/app.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__service_login_service__ = __webpack_require__("./src/app/service/login.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__service_signup_service__ = __webpack_require__("./src/app/service/signup.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -116,7 +120,7 @@ var AppModule = /** @class */ (function () {
                     { path: '**', component: __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */] }
                 ])
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_9__service_app_service__["a" /* AppService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_9__service_app_service__["a" /* AppService */], __WEBPACK_IMPORTED_MODULE_10__service_login_service__["a" /* LoginService */], __WEBPACK_IMPORTED_MODULE_11__service_signup_service__["a" /* SignupService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -167,7 +171,7 @@ module.exports = ""
 /***/ "./src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"loginBlock\">\n  <div class=\"login\">\n    <h1 class=\"mb-3 logoLogin\">API GENERATOR</h1>\n    <form class=\"floatingForm\" [formGroup]=\"loginForm\" (ngSubmit)=\"login()\">\n      <div class=\"form-group position-relative\">\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"userName\" required>\n        <label class=\"floating-label\">User Name<sup>*</sup></label>\n        <div *ngIf=\"loginForm.controls['userName'].errors && !loginForm.controls['userName'].pristine\" class=\"text-danger mt-1\">\n          <div [hidden]=\"!loginForm.controls['userName'].errors.required\">Name is required.</div>\n          <div [hidden]=\"!loginForm.controls['userName'].errors.pattern\">Pattern notmatch.</div>\n          <div [hidden]=\"!loginForm.controls['userName'].errors.minlength\">mininum length 4 charactors required.</div>\n        </div>        \n      </div>\n      <div class=\"form-group position-relative\">\n        <input type=\"password\" name=\"password\" class=\"form-control relative\" formControlName=\"password\" required=\"\">\n        <label class=\"floating-label\">Password<sup>*</sup></label>\n      </div>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!loginForm.valid\">SIGNIN</button>\n      <a class=\"btn btn-primary\" routerLink=\"/signup\">SIGNUP</a>\n    </form>\n    <!-- <p>{{loginForm.value|json}}</p>\n    <p>{{loginForm.valid|json}}</p> -->\n\n  </div>\n</section>"
+module.exports = "<section class=\"loginBlock\">\n\t<div class=\"login\">\n\t\t<h1 class=\"mb-3 logoLogin\">API GENERATOR</h1>\n\t\t<form class=\"floatingForm\" [formGroup]=\"loginForm\"\n\t\t\t(ngSubmit)=\"login()\">\n\t\t\t<div class=\"form-group position-relative\">\n\t\t\t\t<input type=\"text\" class=\"form-control relative\"\n\t\t\t\t\tformControlName=\"email\" required> <label\n\t\t\t\t\tclass=\"floating-label\">Email<sup>*</sup></label>\n\t\t\t\t<div\n\t\t\t\t\t*ngIf=\"loginForm.controls['email'].errors && !loginForm.controls['email'].pristine\"\n\t\t\t\t\tclass=\"text-danger mt-1\">\n\t\t\t\t\t<div [hidden]=\"!loginForm.controls['email'].errors.required\">Email\n\t\t\t\t\t\tis required.</div>\n\t\t\t\t\t<div [hidden]=\"!loginForm.controls['email'].errors.pattern\">Invalid email id</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"form-group position-relative\">\n\t\t\t\t<input type=\"password\" name=\"password\" class=\"form-control relative\"\n\t\t\t\t\tformControlName=\"password\" required=\"\"> <label\n\t\t\t\t\tclass=\"floating-label\">Password<sup>*</sup></label>\n\t\t\t</div>\n\t\t\t<button class=\"btn btn-primary\" type=\"submit\"\n\t\t\t\t[disabled]=\"!loginForm.valid\">SIGNIN</button>\n\t\t\t<a class=\"btn btn-primary\" routerLink=\"/signup\">SIGNUP</a>\n\t\t</form>\n\t\t<!-- <p>{{loginForm.value|json}}</p>\n    <p>{{loginForm.valid|json}}</p> -->\n\n\t</div>\n</section>"
 
 /***/ }),
 
@@ -176,9 +180,10 @@ module.exports = "<section class=\"loginBlock\">\n  <div class=\"login\">\n    <
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__service_login_service__ = __webpack_require__("./src/app/service/login.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -191,38 +196,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(fb, router) {
+    function LoginComponent(fb, router, loginService) {
         this.fb = fb;
         this.router = router;
+        this.loginService = loginService;
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.loginForm = this.fb.group({
-            //userName: ['', Validators.required],
-            userName: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormControl */]('', [
-                __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required,
-                __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].minLength(4),
-                __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].pattern('^[a-zA-Z]*$')
+            email: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]('', [
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required,
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].pattern('^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$')
             ]),
-            password: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required]
+            password: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required]
         });
     };
     LoginComponent.prototype.login = function () {
-        this.loginModel = this.loginForm.value;
-        if (this.loginModel.userName == 'user' && this.loginModel.password == 'user') {
-            this.router.navigate(['user/ReportGeneratorView']);
-        }
-        else {
-            console.log('error');
-        }
+        var _this = this;
+        this.userModel = this.loginForm.value;
+        this.loginService.login(this.userModel.email).subscribe(function (data) {
+            if (data.user && data.user.password === _this.userModel.password) {
+                localStorage.setItem('user', JSON.stringify(data.user));
+                _this.router.navigate(['user/ReportGeneratorView']);
+            }
+        });
     };
     LoginComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'app-login',
             template: __webpack_require__("./src/app/login/login.component.html"),
             styles: [__webpack_require__("./src/app/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_0__service_login_service__["a" /* LoginService */]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -294,6 +300,81 @@ var AppService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/service/login.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LoginService = /** @class */ (function () {
+    function LoginService(http) {
+        this.http = http;
+        this.url = '/api/findByMail';
+    }
+    LoginService.prototype.login = function (email) {
+        this.url = this.url + '?email=' + email;
+        return this.http.get(this.url);
+    };
+    LoginService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], LoginService);
+    return LoginService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/service/signup.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SignupService = /** @class */ (function () {
+    function SignupService(http) {
+        this.http = http;
+        this.url = '/api/saveOrUpdate';
+    }
+    SignupService.prototype.signup = function (user) {
+        return this.http.post(this.url, user);
+    };
+    SignupService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], SignupService);
+    return SignupService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/signup/signup.component.css":
 /***/ (function(module, exports) {
 
@@ -304,7 +385,7 @@ module.exports = ".SignupBlock{\n    background:#000 url('background.08c47441248
 /***/ "./src/app/signup/signup.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"loginBlock\">\n  <div class=\"login\">\n    <h1 class=\"mb-3 logoLogin\">API GENERATOR</h1>\n    <form class=\"floatingForm\" [formGroup]=\"signUpForm\" (ngSubmit)=\"signup()\">\n      <div class=\"form-group position-relative\">\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"UserName\" required=\"\">\n        <label class=\"floating-label\">User Name<sup>*</sup></label>\n      </div>\n      <div class=\"form-group position-relative\">\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"Email\" required=\"\">\n        <label class=\"floating-label\">Email Address<sup>*</sup></label>\n      </div>\n      <div class=\"form-group position-relative\">\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"Phone\" required=\"\">\n        <label class=\"floating-label\">Phone Number<sup>*</sup></label>\n      </div>\n      <div class=\"form-group position-relative\">\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"Location\" required=\"\">\n        <label class=\"floating-label\">Location<sup>*</sup></label>\n      </div>\n      <div class=\"form-group position-relative\">\n        <input type=\"text\" class=\"form-control relative\" formControlName=\"Password\" required=\"\">\n        <label class=\"floating-label\">Password<sup>*</sup></label>\n      </div>\n      <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!signUpForm.valid\">Create Account</button>\n      <a class=\"btn btn-dark\" routerLink=\"/login\">back to login</a>\n      <!--<p>{{signUpForm.value|json}}</p>\n      <p>{{signUpForm.valid|json}}</p>-->\n    </form>\n  </div>\n</section>"
+module.exports = "<section class=\"loginBlock\">\n\t<div class=\"login\">\n\t\t<h1 class=\"mb-3 logoLogin\">API GENERATOR</h1>\n\t\t<form class=\"floatingForm\" [formGroup]=\"signUpForm\"\n\t\t\t(ngSubmit)=\"signup()\">\n\t\t\t<div class=\"form-group position-relative\">\n\t\t\t\t<input type=\"text\" class=\"form-control relative\"\n\t\t\t\t\tformControlName=\"fullName\" required=\"\"> <label\n\t\t\t\t\tclass=\"floating-label\">Name<sup>*</sup></label>\n\t\t\t</div>\n\t\t\t<div class=\"form-group position-relative\">\n\t\t\t\t<input type=\"text\" class=\"form-control relative\"\n\t\t\t\t\tformControlName=\"email\" required=\"\"> <label\n\t\t\t\t\tclass=\"floating-label\">Email Address<sup>*</sup></label>\n\t\t\t</div>\n\t\t\t<div class=\"form-group position-relative\">\n\t\t\t\t<input type=\"text\" class=\"form-control relative\"\n\t\t\t\t\tformControlName=\"phone\" required=\"\"> <label\n\t\t\t\t\tclass=\"floating-label\">Phone Number<sup>*</sup></label>\n\t\t\t</div>\n\t\t\t<div class=\"form-group position-relative\">\n\t\t\t\t<input type=\"text\" class=\"form-control relative\"\n\t\t\t\t\tformControlName=\"password\" required=\"\"> <label\n\t\t\t\t\tclass=\"floating-label\">Password<sup>*</sup></label>\n\t\t\t</div>\n\t\t\t<button class=\"btn btn-primary\" type=\"submit\"\n\t\t\t\t[disabled]=\"!signUpForm.valid\">Create Account</button>\n\t\t\t<a class=\"btn btn-dark\" routerLink=\"/login\">back to login</a>\n\t\t\t<!-- <p>{{signUpForm.value|json}}</p>\n      <p>{{signUpForm.valid|json}}</p>-->\n\t\t</form>\n\t</div>\n</section>"
 
 /***/ }),
 
@@ -313,9 +394,10 @@ module.exports = "<section class=\"loginBlock\">\n  <div class=\"login\">\n    <
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__service_signup_service__ = __webpack_require__("./src/app/service/signup.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -328,30 +410,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SignupComponent = /** @class */ (function () {
-    function SignupComponent(fb, router) {
+    function SignupComponent(fb, router, signUpService) {
         this.fb = fb;
         this.router = router;
+        this.signUpService = signUpService;
     }
     SignupComponent.prototype.ngOnInit = function () {
         this.signUpForm = this.fb.group({
-            UserName: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required],
-            Email: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required],
-            Phone: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required],
-            Location: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required],
-            Password: ['', __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* Validators */].required]
+            fullName: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required],
+            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required],
+            phone: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required],
+            password: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["e" /* Validators */].required]
         });
     };
     SignupComponent.prototype.signup = function () {
-        this.router.navigate(['user/home']);
+        var _this = this;
+        this.user = this.signUpForm.value;
+        this.signUpService.signup(this.user).subscribe(function (data) {
+            if (data) {
+                _this.router.navigate(['/login']);
+            }
+        });
     };
     SignupComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'app-signup',
             template: __webpack_require__("./src/app/signup/signup.component.html"),
             styles: [__webpack_require__("./src/app/signup/signup.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_0__service_signup_service__["a" /* SignupService */]])
     ], SignupComponent);
     return SignupComponent;
 }());
@@ -420,7 +509,7 @@ module.exports = ".modal-lg{\n    max-width: 1200px;\n}\n.reports .edit{\npositi
 /***/ "./src/app/user/report-generator-view/report-generator-view.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"bg-white p-3 mb-3\">\n    <div class=\"row\">\n        <div class=\"col-6 form-inline\">\n            <label class=\"pr-2\">Application Name :</label>\n            <input type=\"text\" class=\"form-control mr-2\" [(ngModel)]=\"appModel.appName\" />\n        </div>\n        <div class=\"col-6 text-right\">\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"edit btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"addForm()\"\n                   title=\"Add Table\"><i class=\"fas fa-plus-square\"></i></button>\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"saveLocal()\" title=\"save Files\"><i class=\"far fa-save\"></i></button>\n                <button type=\"button\" class=\"btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#relationship\" title=\"Relationship\"><i class=\"fas fa-link\"></i></button>\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"build()\" title=\"Build\"><i class=\"fab fa-simplybuilt\"></i></button>\n                <a class=\"btn btn-outline-secondary\"  title=\"Download Files\" href=\"/api/download?fileName={{appModel.appName}}\"><i class=\"fas fa-download\"></i></a>\n            </div>\n        </div>\n    </div>\n\n</section>\n<section class=\"clearfix\">\n    <div class=\"reports\">\n        <!--Card Start-->\n        <div class=\"row mb-3\">\n            <div class=\"col-sm-4 pb-4\" *ngFor=\"let entity of appModel.entites\">\n                <div class=\"card position-relative rounded-0\">\n                    <div class=\"card-body\">\n                        <a class=\"edit\" title=\"Edit\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"editForm(entity)\"><i class=\"far fa-edit\"></i></a>\n                        <a class=\"delete\" title=\"Delete\"><i class=\"far fa-window-close\"></i></a>\n                        <h3>{{entity.name}}</h3>\n                        <table class=\"table table-bordered\">\n                            <tr *ngFor=\"let column of entity.columns\">\n                                <td>{{column.name}}</td>\n                                <td>{{column.type}}</td>\n                            </tr>\n                        </table>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n\n        <!--Card end-->\n    </div>\n     <!-- <p>{{appModel|json}}</p>  -->\n</section>\n\n<div class=\"modal fade\" id=\"edit\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <form [formGroup]=\"entityForm\">\n            <div class=\"modal-content rounded-0\">\n                <div class=\"modal-header rounded-0\">\n                    {{formMode}} Table Details\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"form-inline mb-2\">\n                        <label class=\"mr-2\">Table Name:</label>\n                        <input type=\"text\" class=\"form-control mr-2\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Table Name\">\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addItem()\">Add Column</button>\n                    </div>\n                    <div class=\"position-relative my-2 AddDynamicColmn\" formArrayName=\"columns\" *ngFor=\"let column of entityForm.get('columns').controls; let col = index;\">\n                        <div class=\"row\" [formGroupName]=\"col\">\n                            <div class=\"col-sm-3\">\n                                <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Column Name\">\n                            </div>\n                            <div class=\"col-sm-3\">\n                                <select class=\"form-control\" id=\"exampleFormControlSelect1\" formControlName=\"type\" placeholder=\"Data Type\">\n                                        <option *ngFor=\"let dataType of dataTypes\" [value]=\"dataType\">{{dataType}}</option>\n                                    </select>\n                            </div>\n                            <div class=\"col-sm-6\">\n                                <div class=\"form-inline mb-1 mt-1\">\n                                    <div class=\"form-check pr-4\">\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"mandatory\">\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Nullable</label>\n                                    </div>\n                                    <div class=\"form-check pr-4\">\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"primary\">\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Primary Key</label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"autoGen\">\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Auto Gene</label>\n                                    </div>\n                                    <a class=\"close\" (click)=\"remove(col)\"><i class=\"far fa-trash-alt\"></i></a>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <!-- <p>{{entityForm.value|json}}</p> -->\n                </div>\n                <div class=\"modal-footer rounded-0\">\n                    <button type=\"button\" #saveBtn class=\"btn btn-secondary\" data-dismiss=\"modal\" (click)=\"save()\">Save</button>\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n<div class=\"modal fade\" id=\"relationship\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <form [formGroup]=\"relationForm\">\n            <div class=\"modal-content rounded-0\">\n                <div class=\"modal-header rounded-0\">\n                    Relation Table Details\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"form-inline mb-2\">\n                        <label class=\"mr-2\">Relation Type:</label>\n                        <select class=\"form-control mr-2\" formControlName=\"type\">\n                            <option>ONETOONE</option>\n                            <option>ONETOMANY</option>\n                            <option>MANYTOONE</option>\n                            <option>MANYTOMANY</option>\n                        </select>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-6\">\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\n                                <div class=\"row\">\n                                    <div class=\"col-sm-6\">\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceTable\" (change)=\"sourceTableChange($event.target.value)\">\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\n                                        </select>\n                                    </div>\n                                    <div class=\"col-sm-6\">\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceColumn\" >\n                                        <option *ngFor=\"let column of sourceColumns\" [value]=\"column\">{{column}}</option>\n                                       </select>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"col-sm-6\">\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\n                                <div class=\"row\">\n                                    <div class=\"col-sm-6\">\n                                        <select class=\"form-control mr-2\" formControlName=\"targetTable\" (change)=\"targetTableChange($event.target.value)\">\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\n                                        </select>\n                                    </div>\n                                    <div class=\"col-sm-6\">\n                                        <select class=\"form-control mr-2\" formControlName=\"targetColumn\">\n                                        <option *ngFor=\"let column of targetColumns\" [value]=\"column\">{{column}}</option>\n                                       </select>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                </div>\n                <div class=\"modal-footer rounded-0\">\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" (click)=\"saveRelation()\">Save</button>\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\n                </div>\n            </div>\n            <!-- <p>{{relationForm.value|json}}</p> -->\n        </form>\n    </div>\n</div>"
+module.exports = "<section class=\"bg-white p-3 mb-3\">\n    <div class=\"row\">\n        <div class=\"col-6 form-inline\">\n            <label class=\"pr-2\">Application Name :</label>\n            <input type=\"text\" class=\"form-control mr-2\" [(ngModel)]=\"appModel.appName\" />\n        </div>\n        <div class=\"col-6 text-right\">\n            <div class=\"btn-group\">\n                <button type=\"button\" class=\"edit btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"addForm()\"\n                   title=\"Add Table\"><i class=\"fas fa-plus-square\"></i></button>\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"saveLocal()\" title=\"save Files\"><i class=\"far fa-save\"></i></button>\n                <button type=\"button\" class=\"btn btn-outline-secondary\" data-toggle=\"modal\" data-target=\"#relationship\" title=\"Relationship\"><i class=\"fas fa-link\"></i></button>\n                <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"build()\" title=\"Build\"><i class=\"fab fa-simplybuilt\"></i></button>\n                <a class=\"btn btn-outline-secondary\"  title=\"Download Files\" href=\"/api/download?fileName={{appModel.appName}}\"><i class=\"fas fa-download\"></i></a>\n            </div>\n        </div>\n    </div>\n\n</section>\n<section class=\"clearfix\">\n    <div class=\"reports\">\n        <!--Card Start-->\n        <div class=\"row mb-3\">\n            <div class=\"col-sm-4 pb-4\" *ngFor=\"let entity of appModel.entites\">\n                <div class=\"card position-relative rounded-0\">\n                    <div class=\"card-body\">\n                        <a class=\"edit\" title=\"Edit\" data-toggle=\"modal\" data-target=\"#edit\" (click)=\"editForm(entity)\"><i class=\"far fa-edit\"></i></a>\n                        <a class=\"delete\" title=\"Delete\" (click)=\"deleteEntity(entity)\"><i class=\"far fa-window-close\"></i></a>\n                        <h3>{{entity.name}}</h3>\n                        <table class=\"table table-bordered\">\n                            <tr *ngFor=\"let column of entity.columns\">\n                                <td>{{column.name}}</td>\n                                <td>{{column.type}}</td>\n                            </tr>\n                        </table>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n\n        <!--Card end-->\n    </div>\n     <!-- <p>{{appModel|json}}</p>  -->\n</section>\n\n<div class=\"modal fade\" id=\"edit\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <form [formGroup]=\"entityForm\">\n            <div class=\"modal-content rounded-0\">\n                <div class=\"modal-header rounded-0\">\n                    {{formMode}} Table Details\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"form-inline mb-2\">\n                        <label class=\"mr-2\">Table Name:</label>\n                        <input type=\"text\" class=\"form-control mr-2\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Table Name\">\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addItem()\">Add Column</button>\n                    </div>\n                    <div class=\"position-relative my-2 AddDynamicColmn\" formArrayName=\"columns\" *ngFor=\"let column of entityForm.get('columns').controls; let col = index;\">\n                        <div class=\"row\" [formGroupName]=\"col\">\n                            <div class=\"col-sm-3\">\n                                <input type=\"text\" class=\"form-control\" id=\"exampleInputPassword1\" formControlName=\"name\" placeholder=\"Column Name\">\n                            </div>\n                            <div class=\"col-sm-3\">\n                                <select class=\"form-control\" id=\"exampleFormControlSelect1\" formControlName=\"type\" placeholder=\"Data Type\">\n                                        <option *ngFor=\"let dataType of dataTypes\" [value]=\"dataType\">{{dataType}}</option>\n                                    </select>\n                            </div>\n                            <div class=\"col-sm-6\">\n                                <div class=\"form-inline mb-1 mt-1\">\n                                    <div class=\"form-check pr-4\">\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"mandatory\">\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Nullable</label>\n                                    </div>\n                                    <div class=\"form-check pr-4\">\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"primary\">\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Primary Key</label>\n                                    </div>\n                                    <div class=\"form-check\">\n                                        <input type=\"checkbox\" class=\"form-check-input\" id=\"exampleCheck1\" formControlName=\"autoGen\">\n                                        <label class=\"form-check-label\" for=\"exampleCheck1\">Auto Gene</label>\n                                    </div>\n                                    <a class=\"close\" (click)=\"remove(col)\"><i class=\"far fa-trash-alt\"></i></a>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <!-- <p>{{entityForm.value|json}}</p> -->\n                </div>\n                <div class=\"modal-footer rounded-0\">\n                    <button type=\"button\" #saveBtn class=\"btn btn-secondary\" data-dismiss=\"modal\" (click)=\"save()\">Save</button>\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n<div class=\"modal fade\" id=\"relationship\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <form [formGroup]=\"relationForm\">\n            <div class=\"modal-content rounded-0\">\n                <div class=\"modal-header rounded-0\">\n                    Relation Table Details\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"form-inline mb-2\">\n                        <label class=\"mr-2\">Relation Type:</label>\n                        <select class=\"form-control mr-2\" formControlName=\"type\">\n                            <option>ONETOONE</option>\n                            <option>ONETOMANY</option>\n                            <option>MANYTOONE</option>\n                            <option>MANYTOMANY</option>\n                        </select>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-sm-6\">\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\n                                <div class=\"row\">\n                                    <div class=\"col-sm-6\">\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceTable\" (change)=\"sourceTableChange($event.target.value)\">\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\n                                        </select>\n                                    </div>\n                                    <div class=\"col-sm-6\">\n                                        <select class=\"form-control mr-2\" formControlName=\"sourceColumn\" >\n                                        <option *ngFor=\"let column of sourceColumns\" [value]=\"column\">{{column}}</option>\n                                       </select>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"col-sm-6\">\n                            <div class=\"position-relative my-2 AddDynamicColmn\">\n                                <div class=\"row\">\n                                    <div class=\"col-sm-6\">\n                                        <select class=\"form-control mr-2\" formControlName=\"targetTable\" (change)=\"targetTableChange($event.target.value)\">\n                                            <option *ngFor=\"let table of appModel.entites\" [value]=\"table.name\">{{table.name}}</option>\n                                        </select>\n                                    </div>\n                                    <div class=\"col-sm-6\">\n                                        <select class=\"form-control mr-2\" formControlName=\"targetColumn\">\n                                        <option *ngFor=\"let column of targetColumns\" [value]=\"column\">{{column}}</option>\n                                       </select>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                </div>\n                <div class=\"modal-footer rounded-0\">\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" (click)=\"saveRelation()\">Save</button>\n                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">close</button>\n                </div>\n            </div>\n            <!-- <p>{{relationForm.value|json}}</p> -->\n        </form>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -431,9 +520,10 @@ module.exports = "<section class=\"bg-white p-3 mb-3\">\n    <div class=\"row\">
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportGeneratorViewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dto_appmodel__ = __webpack_require__("./src/app/dto/appmodel.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dto_relationmodel__ = __webpack_require__("./src/app/dto/relationmodel.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_app_service__ = __webpack_require__("./src/app/service/app.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dto_appmodel__ = __webpack_require__("./src/app/dto/appmodel.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dto_relationmodel__ = __webpack_require__("./src/app/dto/relationmodel.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__service_app_service__ = __webpack_require__("./src/app/service/app.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -448,9 +538,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ReportGeneratorViewComponent = /** @class */ (function () {
-    function ReportGeneratorViewComponent(fb, appService) {
+    function ReportGeneratorViewComponent(fb, router, appService) {
         this.fb = fb;
+        this.router = router;
         this.appService = appService;
         this.formMode = 'Add';
         this.columns = [];
@@ -459,7 +551,8 @@ var ReportGeneratorViewComponent = /** @class */ (function () {
         this.dataTypes = ['String', 'Integer', 'Long', 'Double', 'Date', 'LocalDate', 'LocalDateTime', 'Boolean'];
     }
     ReportGeneratorViewComponent.prototype.ngOnInit = function () {
-        this.appModel = new __WEBPACK_IMPORTED_MODULE_2__dto_appmodel__["a" /* AppModel */]();
+        this.loadUser();
+        this.appModel = new __WEBPACK_IMPORTED_MODULE_3__dto_appmodel__["a" /* AppModel */]();
         this.appModel.entites = new Array();
         this.appModel.appName = '';
         this.appModel.packageName = '';
@@ -587,7 +680,7 @@ var ReportGeneratorViewComponent = /** @class */ (function () {
             if (entity.name === relation.sourceTable) {
                 entity.columns.forEach(function (column) {
                     if (column.name === relation.sourceColumn) {
-                        var relationModel = new __WEBPACK_IMPORTED_MODULE_3__dto_relationmodel__["a" /* RelationModel */]();
+                        var relationModel = new __WEBPACK_IMPORTED_MODULE_4__dto_relationmodel__["a" /* RelationModel */]();
                         relationModel.source = true;
                         relationModel.columnName = relation.targetColumn;
                         relationModel.relationType = relation.type;
@@ -599,7 +692,7 @@ var ReportGeneratorViewComponent = /** @class */ (function () {
             else if (entity.name === relation.targetTable) {
                 entity.columns.forEach(function (column) {
                     if (column.name === relation.targetColumn) {
-                        var relationModel = new __WEBPACK_IMPORTED_MODULE_3__dto_relationmodel__["a" /* RelationModel */]();
+                        var relationModel = new __WEBPACK_IMPORTED_MODULE_4__dto_relationmodel__["a" /* RelationModel */]();
                         relationModel.columnName = relation.targetColumn;
                         relationModel.source = false;
                         if (relation.type === 'ONETOMANY') {
@@ -620,13 +713,24 @@ var ReportGeneratorViewComponent = /** @class */ (function () {
             }
         });
     };
+    ReportGeneratorViewComponent.prototype.loadUser = function () {
+        if (localStorage.getItem('user')) {
+            this.userModel = JSON.parse(localStorage.getItem('user'));
+        }
+        if (!this.userModel) {
+            this.router.navigate(['login']);
+        }
+    };
+    ReportGeneratorViewComponent.prototype.deleteEntity = function (entity) {
+        this.appModel.entites = this.appModel.entites.filter(function (data) { return data.name !== entity.name; });
+    };
     ReportGeneratorViewComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-report-generator-view',
             template: __webpack_require__("./src/app/user/report-generator-view/report-generator-view.component.html"),
             styles: [__webpack_require__("./src/app/user/report-generator-view/report-generator-view.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__service_app_service__["a" /* AppService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_5__service_app_service__["a" /* AppService */]])
     ], ReportGeneratorViewComponent);
     return ReportGeneratorViewComponent;
 }());
@@ -645,7 +749,7 @@ module.exports = ".dropdown.options .dropdown-menu{\n    margin-top: 12px;\n    
 /***/ "./src/app/user/user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"Menu {{sideBar}}\">\n<header class=\"position-relative\">\n    <div class=\"container-fluid position-static\">\n        <div class=\"row m-0\">\n            <div class=\"col-6 p-0 position-static\">\n                <a class=\"settingBtn MenuBarBtn\" (click)=\"toggle()\"><i class=\"fas fa-cogs\"></i></a>\n                <span class=\"logo\">API Generator</span></div>\n            <div class=\"col-6 p-0 text-right\">\n                <div class=\"dropdown options\">\n                    <a class=\"dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">{{username}}</a>\n                    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n                        <a class=\"dropdown-item\" href=\"#\">Settings</a>\n                        <a class=\"dropdown-item\" href=\"#\">Profile</a>\n                        <a class=\"dropdown-item border-0\" routerLink=\"/signin\">Logout</a>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n    <aside class=\"sidebar\">\n        <ul>\n            <li><a routerLink=\"/user/home\" routerLinkActive=\"active\">Home</a></li>\n            <li><a routerLink=\"/user/ReportGeneratorView\" routerLinkActive=\"active\">Create Report</a></li>\n        </ul>\n    </aside>\n    <main class=\"container-fluid py-3\">\n        <div class=\"body-content\">\n        <router-outlet></router-outlet>\n        </div>\n    </main>\n</div>"
+module.exports = "<div class=\"Menu {{sideBar}}\">\n\t<header class=\"position-relative\">\n\t\t<div class=\"container-fluid position-static\">\n\t\t\t<div class=\"row m-0\">\n\t\t\t\t<div class=\"col-6 p-0 position-static\">\n\t\t\t\t\t<a class=\"settingBtn MenuBarBtn\" (click)=\"toggle()\"><i\n\t\t\t\t\t\tclass=\"fas fa-cogs\"></i></a> <span class=\"logo\">API Generator</span>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-6 p-0 text-right\">\n\t\t\t\t\t<div class=\"dropdown options\">\n\t\t\t\t\t\t<a class=\"dropdown-toggle\" id=\"dropdownMenuButton\"\n\t\t\t\t\t\t\tdata-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">{{userModel.fullName}}</a>\n\t\t\t\t\t\t<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n\t\t\t\t\t\t\t<a class=\"dropdown-item\" href=\"#\">Settings</a> <a\n\t\t\t\t\t\t\t\tclass=\"dropdown-item\" href=\"#\">Profile</a> <a\n\t\t\t\t\t\t\t\tclass=\"dropdown-item border-0\" routerLink=\"/signin\">Logout</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</header>\n\t<aside class=\"sidebar\">\n\t\t<ul>\n\t\t\t<li><a routerLink=\"/user/home\" routerLinkActive=\"active\">Home</a></li>\n\t\t\t<li><a routerLink=\"/user/ReportGeneratorView\"\n\t\t\t\trouterLinkActive=\"active\">Create Report</a></li>\n\t\t</ul>\n\t</aside>\n\t<main class=\"container-fluid py-3\">\n\t<div class=\"body-content\">\n\t\t<router-outlet></router-outlet>\n\t</div>\n\t</main>\n</div>"
 
 /***/ }),
 
@@ -655,6 +759,7 @@ module.exports = "<div class=\"Menu {{sideBar}}\">\n<header class=\"position-rel
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -665,11 +770,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var UserComponent = /** @class */ (function () {
-    function UserComponent() {
+    function UserComponent(router) {
+        this.router = router;
         this.username = 'Tamarada';
     }
     UserComponent.prototype.ngOnInit = function () {
+        this.loadUser();
     };
     UserComponent.prototype.toggle = function () {
         if (this.sideBar) {
@@ -679,13 +787,21 @@ var UserComponent = /** @class */ (function () {
             this.sideBar = 'active';
         }
     };
+    UserComponent.prototype.loadUser = function () {
+        if (localStorage.getItem('user')) {
+            this.userModel = JSON.parse(localStorage.getItem('user'));
+        }
+        if (!this.userModel) {
+            this.router.navigate(['login']);
+        }
+    };
     UserComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-user',
             template: __webpack_require__("./src/app/user/user.component.html"),
             styles: [__webpack_require__("./src/app/user/user.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]])
     ], UserComponent);
     return UserComponent;
 }());

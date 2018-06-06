@@ -1,4 +1,7 @@
+import {UserModel} from '../dto/usermodel';
 import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, ParamMap} from '@angular/router';
+
 
 @Component({
   selector: 'app-user',
@@ -8,9 +11,11 @@ import {Component, OnInit} from '@angular/core';
 export class UserComponent implements OnInit {
   username = 'Tamarada';
   sideBar;
-  constructor() {}
+  userModel: UserModel;
+  constructor(private router: Router) {}
 
   ngOnInit() {
+    this.loadUser();
   }
 
   toggle() {
@@ -18,6 +23,15 @@ export class UserComponent implements OnInit {
       this.sideBar = null;
     } else {
       this.sideBar = 'active';
+    }
+  }
+
+  loadUser() {
+    if (localStorage.getItem('user')) {
+      this.userModel = JSON.parse(localStorage.getItem('user'));
+    }
+    if (!this.userModel) {
+      this.router.navigate(['login']);
     }
   }
 

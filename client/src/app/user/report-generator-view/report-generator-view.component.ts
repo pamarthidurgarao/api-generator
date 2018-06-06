@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormArray} from '@angular/forms';
+import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import {AppModel} from '../../dto/appmodel';
 import {EntityModel} from '../../dto/entitymodel';
 import {ColumnModel} from '../../dto/columnmodel';
 import {RelationModel} from '../../dto/relationmodel';
 import {RelationType} from '../../dto/relationtype';
+import {UserModel} from '../../dto/usermodel';
 import {AppService} from '../../service/app.service';
 
 @Component({
@@ -16,6 +18,7 @@ export class ReportGeneratorViewComponent implements OnInit {
 
   appModel: AppModel;
   formMode = 'Add';
+  userModel: UserModel;
 
   entityForm: FormGroup;
   relationForm: FormGroup;
@@ -24,9 +27,10 @@ export class ReportGeneratorViewComponent implements OnInit {
   targetColumns = [];
   dataTypes = ['String', 'Integer', 'Long', 'Double', 'Date', 'LocalDate', 'LocalDateTime', 'Boolean'];
 
-  constructor(private fb: FormBuilder, private appService: AppService) {}
+  constructor(private fb: FormBuilder, private router: Router, private appService: AppService) {}
 
   ngOnInit() {
+    this.loadUser();
     this.appModel = new AppModel();
     this.appModel.entites = new Array<EntityModel>();
     this.appModel.appName = '';
@@ -192,5 +196,18 @@ export class ReportGeneratorViewComponent implements OnInit {
         });
       }
     });
+  }
+
+  loadUser() {
+    if (localStorage.getItem('user')) {
+      this.userModel = JSON.parse(localStorage.getItem('user'));
+    }
+    if (!this.userModel) {
+      this.router.navigate(['login']);
+    }
+  }
+
+  deleteEntity(entity: EntityModel) {
+    this.appModel.entites = this.appModel.entites.filter(data => data.name !== entity.name);
   }
 }

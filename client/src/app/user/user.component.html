@@ -1,32 +1,35 @@
 <div class="Menu {{sideBar}}">
-<header class="position-relative">
-    <div class="container-fluid position-static">
-        <div class="row m-0">
-            <div class="col-6 p-0 position-static">
-                <a class="settingBtn MenuBarBtn" (click)="toggle()"><i class="fas fa-cogs"></i></a>
-                <span class="logo">API Generator</span></div>
-            <div class="col-6 p-0 text-right">
-                <div class="dropdown options">
-                    <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{username}}</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item border-0" routerLink="/signin">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-    <aside class="sidebar">
-        <ul>
-            <li><a routerLink="/user/home" routerLinkActive="active">Home</a></li>
-            <li><a routerLink="/user/ReportGeneratorView" routerLinkActive="active">Create Report</a></li>
-        </ul>
-    </aside>
-    <main class="container-fluid py-3">
-        <div class="body-content">
-        <router-outlet></router-outlet>
-        </div>
-    </main>
+	<header class="position-relative">
+		<div class="container-fluid position-static">
+			<div class="row m-0">
+				<div class="col-6 p-0 position-static">
+					<a class="settingBtn MenuBarBtn" (click)="toggle()"><i
+						class="fas fa-cogs"></i></a> <span class="logo">API Generator</span>
+				</div>
+				<div class="col-6 p-0 text-right">
+					<div class="dropdown options">
+						<a class="dropdown-toggle" id="dropdownMenuButton"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{userModel.fullName}}</a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Settings</a> <a
+								class="dropdown-item" href="#">Profile</a> <a
+								class="dropdown-item border-0" routerLink="/signin">Logout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<aside class="sidebar">
+		<ul>
+			<li><a routerLink="/user/home" routerLinkActive="active">Home</a></li>
+			<li><a routerLink="/user/ReportGeneratorView"
+				routerLinkActive="active">Create Report</a></li>
+		</ul>
+	</aside>
+	<main class="container-fluid py-3">
+	<div class="body-content">
+		<router-outlet></router-outlet>
+	</div>
+	</main>
 </div>
